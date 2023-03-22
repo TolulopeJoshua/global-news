@@ -49,6 +49,8 @@ const Home = () => {
       setGuess({number:Math.floor(Math.random() * 100)+1, input:0, attempts:0, result:0})
       getWeather(city);
       setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
+
+      axios.get('https://gipnews-default-rtdb.firebaseio.com').then(res => console.log(res)).catch(err => console.log(err))
     }, [])
     
   function dayString(date) {
