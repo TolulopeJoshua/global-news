@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Card from '../../components/Card'
+import Paginate from '../../components/Paginate'
 
 export default () => {
   return (
@@ -123,6 +124,9 @@ export default () => {
           <div className='flex flex-col w-full sm:w-3/4 lg:w-1/2'>
             <Card title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
           </div>
+          <div className='w-full'>
+            <Paginate />
+          </div>
         </section>
         <section className='px-[3%] flex flex-wrap items-start py-4'>
             <div className='hidden md:flex md:w-1/2 xl:w-2/5'>
@@ -149,7 +153,6 @@ export default () => {
             <div className='w-full sm:w-1/2 md:w-1/4 xl:w-1/5'>
               <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            
         </section>
 
     </main>
