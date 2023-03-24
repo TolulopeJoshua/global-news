@@ -45,12 +45,14 @@ const Home = () => {
   }
 
   useEffect(() => {
-      axios.get('/api/location').then(res => res.data && setCity(res.data)).catch(err => console.log(err))
+      axios.get('/api/location').then(res => {
+        res.data && setCity(res.data)
+        getWeather(res.data || city);
+      }).catch(err => console.log(err))
       setGuess({number:Math.floor(Math.random() * 100)+1, input:0, attempts:0, result:0})
-      getWeather(city);
       setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
 
-      axios.get('https://gipnews-default-rtdb.firebaseio.com').then(res => console.log(res)).catch(err => console.log(err))
+      axios.get('/api/data').then(res => console.log(res.data)).catch(err => console.log(err))
     }, [])
     
   function dayString(date) {
@@ -65,7 +67,7 @@ const Home = () => {
       </Head>
 
       <main className="w-full py-[3%]">
-        <section className='px-[3%] flex justify-between p-2 text-xl text-gray-600'>
+        <section className='px-[3%] flex justify-between py-2 text-xl text-gray-600'>
           <h1 className='font-bold'>Welcome to GIP News</h1>
           <span>{(new Date()).toUTCString().slice(0,11)}</span>
         </section>
@@ -190,7 +192,7 @@ const Home = () => {
               setGuess(init => ({...init, attempts: init.attempts+1, input: parseInt(e.target.value)}))
             }} /></p>
             <p><small>{guess.input} (too {guess.input > guess.number ? 'high':'low'})</small></p>
-            <div className={`absolute transition-transform ${guess.result ? 'translate-y-0':'translate-y-full'} top-0 bg-blue-100 h-full w-[400px] max-w-full p-2 rounded flex align-middle justify-center flex-col gap-1`}>
+            <div className={`absolute transition-transform ${guess.result ? 'translate-y-0':'translate-y-full'} top-0 bg-blue-50 h-full w-[400px] max-w-full p-2 rounded flex align-middle justify-center flex-col gap-1`}>
               <p className='flex justify-between align-middle font-bold font-[cursive]'>
                 <span>And the number is: {guess.number}</span>
                 <button onClick={() => {

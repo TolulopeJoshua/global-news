@@ -1,0 +1,1 @@
+export default ['top','sports','world','business','health','science,technology','entertainment']
