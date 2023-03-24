@@ -22,7 +22,7 @@ export default async function handler(req,  res) {
             }
         };
         let sectionData = [];
-        const sectionPath = `tmp/${section.split(',')[0]}.json`;
+        const sectionPath = `/tmp/${section.split(',')[0]}.json`;
         try {
             sectionData = JSON.parse(readFileSync(sectionPath)) || [];
         } catch (error) { writeFileSync(sectionPath, '[]') }
