@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 
 export default async () => {
