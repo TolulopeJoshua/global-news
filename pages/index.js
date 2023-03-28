@@ -10,10 +10,13 @@ import axios from 'axios'
 import Card from '../components/Card'
 import VCard from '../components/VCard'
 import List from '../components/List'
+import Loader from '../components/Loader'
+import Error from '../components/Error'
 
 import bg1 from '../public/images/bg1.jpg'
 import bg2 from '../public/images/bg2.jpg'
 import bg3 from '../public/images/bg3.jpg'
+import Link from 'next/link'
 
 const Home = () => {
   const [guess, setGuess] = useState({number:0, input:0, attempts:0, result:0})
@@ -22,6 +25,8 @@ const Home = () => {
   const [notFound, setNotFound] = useState(false);
   const [weatherData, setWeatherData] = useState([]);
   const [vBg, setVBg] = useState(bg1)
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   // console.log(weatherData)
 
   const getWeather = (location) => {
@@ -52,42 +57,49 @@ const Home = () => {
       setGuess({number:Math.floor(Math.random() * 100)+1, input:0, attempts:0, result:0})
       setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
 
-      axios.get('/api/data').then(res => console.log(res.data)).catch(err => console.log(err))
+      axios.get('/api/data').then(res => {
+        // console.log(res.data)
+        setData(res.data);
+        setLoading(false)
+      }).catch(err => setLoading(false))
     }, [])
     
   function dayString(date) {
     return (new Date(date)).toString().slice(0,3)
   }
+
+  if (!data) {
+    if (loading) return <Loader />
+    return <Error />
+  }
   
   return (
-    <div className="min-h-screen overflow-hidden">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="w-full py-[3%]">
+      <main className="w-full py-[3%] min-h-screen overflow-hidden">
+        <Head>
+          <title>GIP News | Homepage</title>
+          <meta
+            name="description"
+            content="Breaking news, latest news, sports and entertainment, health, science and technology."
+            key="desc"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <section className='px-[3%] flex justify-between py-2 text-xl text-gray-600'>
-          <h1 className='font-bold'>Welcome to GIP News</h1>
-          <span>{(new Date()).toUTCString().slice(0,11)}</span>
+          <h1 className='font-bold px-2'>Welcome to GIP News</h1>
+          <span className='px-2'>{(new Date()).toUTCString().slice(0,11)}</span>
         </section>
         <section className='px-[3%] block sm:flex flex-wrap'>
           <div className='w-full lg:w-6/12'>
-            <Card title='My Title 1' cat='News' inline={1} hide={0} size='text-2xl' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <Card news={data.world[0]} title='My Title 1' cat='News' inline={1} hide={0} size='text-2xl' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
           </div>
           <div className='w-full lg:w-6/12 sm:flex flex-wrap'>
-            <div className='sm:w-6/12 sm:h-3/6'>
-              <Card title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div className='sm:w-6/12 sm:h-3/6'>
-              <Card title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div className='sm:w-6/12 sm:h-3/6'>
-              <Card title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div className='sm:w-6/12 sm:h-3/6'>
-              <Card title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
+            {
+              data.world.slice(1,5).map(article => (
+              <div key={article.id} className='sm:w-6/12 sm:h-3/6'>
+                <Card news={article} title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              </div>
+              ))
+            }
           </div>
         </section>
         <section className='px-[3%] flex flex-wrap sm:flex-row-reverse justify-center py-4'>
@@ -138,46 +150,40 @@ const Home = () => {
               <span className='text-xl font-extrabold text-blue-800'>|</span>
               <span className='font-bold text-2xl text-gray-600'>News</span>
             </div>
-            <div className='flex flex-wrap w-full pb-4'>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
+            <div className='flex flex-wrap items-start w-full pb-4'>
+              {
+                data.top.slice(0,3).map(article => (
+                  <div key={article.id} className='w-full sm:w-1/3 flex h-full'>
+                    <Card news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                  </div>
+                ))
+              }
             </div>
             <div className='flex align-center px-2 gap-1'>
               <span className='text-xl font-extrabold text-blue-800'>|</span>
-              <span className='font-bold text-2xl text-gray-600'>News</span>
+              <span className='font-bold text-2xl text-gray-600'>Sports</span>
             </div>
-            <div className='flex flex-wrap w-full pb-4'>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
+            <div className='flex flex-wrap w-full items-start h-full pb-4'>
+              {
+                data.sports.slice(0,3).map(article => (
+                  <div key={article.id} className='w-full sm:w-1/3'>
+                    <Card news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                  </div>
+                ))
+              }
             </div>
             <div className='flex align-center px-2 gap-1'>
               <span className='text-xl font-extrabold text-blue-800'>|</span>
-              <span className='font-bold text-2xl text-gray-600'>News</span>
+              <span className='font-bold text-2xl text-gray-600'>Health</span>
             </div>
-            <div className='flex flex-wrap w-full pb-4'>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
-              <div className='w-full sm:w-1/3'>
-                <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              </div>
+            <div className='flex flex-wrap w-full items-start h-full pb-4'>
+              {
+                data.health.slice(0,3).map(article => (
+                  <div key={article.id} className='w-full sm:w-1/3'>
+                    <Card news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                  </div>
+                ))
+              }
             </div>
           </div>
         </section>
@@ -207,82 +213,79 @@ const Home = () => {
             <Image className='absolute -z-10 scale-110' src={vBg} layout='fill' objectFit='cover' quality={100} alt='background' />
             <div className='relative text-gray-200 text-5xl'>
               <strong>REEL</strong>
-              <button className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></button>
+              <Link href={'/reel'} className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></Link>
             </div>
             <span className='py-2 text-white'>Trending videos from around the web</span>
             <div className='flex flex-col sm:flex-row gap-4 py-2'>
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              {
+                data.reel.slice(0,3).map(video => (
+                  <VCard key={video.id} video={video} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                ))
+              }
             </div>
         </section>
         <section className='px-[3%] pb-6'>
           <div className='flex align-center p-2 gap-1'>
             <span className='text-xl font-extrabold text-blue-800'>|</span>
-            <span className='font-bold text-2xl text-gray-600'>News</span>
+            <span className='font-bold text-2xl text-gray-600'>World</span>
           </div>
-          <div className='flex w-full'>
+          <div className='flex w-full items-start'>
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
-              <Card title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              {/* <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
+              <Card news={data.world[5]} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              {/* <Card news={data.world[2]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
             </div>
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[5]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[7]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[8]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
         <section className='px-[3%] flex flex-wrap justify-center py-6 sm:bg-blue-50'>
-          <div className='w-full h-max sm:w-2/3 flex flex-wrap'>
+          <div className='w-full h-auto sm:w-2/3 flex flex-wrap items-start'>
             <div className='flex align-center px-2 gap-1'>
               <span className='text-xl font-extrabold text-blue-800'>|</span>
-              <span className='font-bold text-2xl text-gray-600'>News</span>
+              <span className='font-bold text-2xl text-gray-600'>Features</span>
             </div>
-            <div className='flex flex-wrap w-full pb-4'>
+            <div className='flex flex-wrap w-full h-auto pb-4'>
               <div className='w-full sm:hidden'>
-                <Card title={'Title 1'} hide={0} inline={1} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                <Card news={data.entertainment[0]} title={'Title 1'} hide={0} inline={1} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               </div>
               <div className='w-full hidden sm:block xl:hidden'>
-                <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                <Card news={data.entertainment[0]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               </div>
               <div className='w-full hidden xl:block'>
-                <Card title={'Title 1'} hide={0} inline={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                <Card news={data.entertainment[0]} title={'Title 1'} hide={0} inline={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               </div>
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data.entertainment[1]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data.entertainment[2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data['science,technology'][0]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data['science,technology'][1]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data['science,technology'][2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data.entertainment[3]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
           <div className='w-full sm:w-1/3 h-full sm:pt-10 p-2'>
             <div className=''>
-              <List list={[
-                {title: 'this is a random business article title'}, 
-                {title: 'this is a random business article title'}, 
-                {title: 'this is a random business article title'}, 
-                {title: 'this is a random business article title'}, 
-              ]} />
+              <List title={'Business News'} list={data.business.slice(4,8)} />
             </div>
           </div>
         </section>
@@ -290,44 +293,45 @@ const Home = () => {
             <Image className='absolute -z-10 scale-110' src={vBg} layout='fill' objectFit='cover' quality={100} alt='background' />
             <div className='relative text-gray-200 text-5xl'>
               <strong>REEL</strong>
-              <button className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></button>
+              <Link href={'/reel'} className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></Link>
             </div>
-            <span className='py-2 text-white'>Trending videos from around the web</span>
+            <span className='py-2 text-white'>More trending videos from around the web</span>
             <div className='flex flex-col sm:flex-row gap-4 py-2'>
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              {
+                data.reel.slice(3,6).map(video => (
+                  <VCard key={video.id} video={video} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                ))
+              }
             </div>
         </section>
         <section className='px-[3%]'>
-          <div className='w-full flex flex-wrap py-4'>
+          <div className='w-full flex flex-wrap py-4 items-start'>
             <div className='hidden sm:flex sm:w-1/2'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[0]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='hidden sm:flex sm:w-1/2'>
-              <Card title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[1]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:hidden'>
-              <Card title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[0]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:hidden'>
-              <Card title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[1]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
-          <div className='flex flex-wrap py-4'>
+          <div className='flex flex-wrap py-4 items-start'>
             <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[2]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:w-full lg:w-1/3 sm:order-first lg:order-none'>
               <span>Ad</span>
             </div>
             <div className='w-full sm:w-1/2 lg:w-1/3'>
-              <Card title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.business[3]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
       </main>
-    </div>
   )
 }
 

@@ -1,26 +1,42 @@
 import { Fragment } from 'react'
+import { useRouter } from 'next/router'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { AiOutlineSearch } from 'react-icons/ai'
+import { BsDot } from 'react-icons/bs'
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+import sections from '../utils/sections'
+import Link from 'next/link'
+import Image from 'next/image'
+// [
+//   { name: 'Dashboard', href: '#', current: true },
+//   { name: 'Team', href: '#', current: false },
+//   { name: 'Projects', href: '#', current: false },
+//   { name: 'Calendar', href: '#', current: false },
+// ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function () {
+  const router = useRouter()
+  const { section: currSection } = router.query
+
+  const navigation = sections.map(section => ({
+      name: section.includes('science') ? 'Sci/Tech' : section[0].toUpperCase() + section.slice(1),
+      href: `/${section}`,
+      current: (section == currSection) || router.pathname.includes(section)
+  }))
+  navigation.unshift({name: 'Home', href:'/', current: router.pathname == '/'})
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -31,9 +47,14 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
+              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+                <div className="flex flex-shrink-0 items-center relative">
+                    <span className='text-white font-semibold text-4xl'>GIP</span>
+                    <span className='flex items-end w-full px-1 text-xs -rotate-6 absolute bottom-1 bg-blue-500/70 text-white rounded-full'>
+                      <BsDot />
+                      <span className='font-semibold text-white'>news</span>
+                    </span>
+                  {/* <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     alt="Your Company"
@@ -42,37 +63,36 @@ export default function Example() {
                     className="hidden h-8 w-auto lg:block"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     alt="Your Company"
-                  />
+                  /> */}
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+                <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          'rounded-md px-0 lg:px-2 py-2 text-sm font-medium flex'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
+                <Link href={'/search'} className='flex items-center p-1 lg:px-4 hover:px-5 transition-all mr-3 rounded-full bg-gray-300 cursor-text text-sm font-semibold outline-none ring-2 ring-gray-300 ring-offset-2 ring-offset-gray-800'>
+                  <span className='pr-2 hidden lg:inline-block'>Search</span><AiOutlineSearch />
+                </Link>
+                <Link href={'https://godinprints.org'} target={'_blank'} className="bg-gray-800 px-3 py-1 text-gray-400 hover:text-white font-semibold" >
+                  <Image src={'/bookstack.png'} width={32} height={32} alt='GIP Library' />
+                </Link>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                {/* <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
@@ -125,18 +145,17 @@ export default function Example() {
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
-                </Menu>
+                </Menu> */}
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
+                <Link key={item.name} href={item.href}>
                 <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
+                  as="div"
                   className={classNames(
                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
@@ -145,6 +164,7 @@ export default function Example() {
                 >
                   {item.name}
                 </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>

@@ -1,1 +1,1 @@
-export default ['top','sports','world','business','health','science,technology','entertainment']
+export default ['world','sports','business','health','top','science,technology','entertainment','reel']

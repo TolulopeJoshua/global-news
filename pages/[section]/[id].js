@@ -1,74 +1,78 @@
-import axios from 'axios'
-import Head from 'next/head'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
+
+import axios from 'axios'
 
 import Card from '../../components/Card'
-import Error from '../../components/Error'
 import Loader from '../../components/Loader'
+import Error from '../../components/Error'
 
 export default () => {
 
     const [data, setData] = useState(null);
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true)
-    const router = useRouter()
-    const { id } = router.query
+    const router = useRouter();
+    const { section, id } = router.query;
 
     useEffect(() => {
         if(data) {
             let { content } = data;
-            // content = content.replace(/Search+.+ago/, '');
-            // content = content.replace(/\-[0-9]+\-0'\)\;\ \}\)\;/g, '');
-            // content = content.replaceAll('googletag.cmd.push(function() { googletag.display(\'div-gpt-ad', '');
-            content = content.replaceAll('\n', '<br>').split('. ');
-            let index = 0;
-            while (index < content.length) {
-                index += 5;
-                content.splice(index,0,'<br ><br >')
+            content = content.replaceAll('\n','<br>')
+            content = content.replace(/Search+.+ago/, '');
+            content = content.replace(/\-[0-9]+\-0'\)\;\ \}\)\;/g, '');
+            content = content.replaceAll('googletag.cmd.push(function() { googletag.display(\'div-gpt-ad', '');
+            if (!content.includes('<br>')) {
+                content = content.split('. ');
+                let index = 0; console.log(content)
+                while (index < content.length) {
+                    index += 5;
+                    content.splice(index,0,'<br ><br >')
+                }
+                content = content.map(str => str == '<br ><br >' ? str : str+'. ').join('');
             }
-            content = content.map(str => str == '<br ><br >' ? str : str+'. ').join('');
             document.querySelector('#content').innerHTML = content;
         }
         
     }, [data])
-
+  
     useEffect(() => {
-      if (id) {
-          const url = `/api/data/sports/${id}`
-          axios.get(url).then(res => {
-              setLoading(false);
-              setData(res.data.data);
-              setList(res.data.list);
-              // console.log(res.data)
-          }).catch(err => setLoading(false))
-      }
-    }, [id])
+        if (section && id) {
+            const url = `/api/data/${section}/${id}`
+            axios.get(url).then(res => {
+                setLoading(false);
+                setData(res.data.data);
+                setList(res.data.list);
+                // console.log(res.data)
+            }).catch(err => setLoading(false))
+        }
+    }, [section, id])
 
     if (!data && !list.length) {
         if (loading)  return <Loader />
         return <Error />
     }
-      
+
   return (
         <main>
-            <Head>
-                <title>GIP News | {data?.title}</title>
-                <meta
-                    name="description"
-                    content={`Sports news | ${data?.description}`}
-                    key="desc"
-                />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+        <Head>
+          <title>GIP News | {data?.title}</title>
+          <meta
+            name="description"
+            content={`Breaking news | latest news | ${data?.description}`}
+            key="desc"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>
                     {
-                        data ? <>
+                        data? <>
                         <h1 className='pb-8 text-gray-700 text-4xl font-bold'>{data.title}</h1>
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
-                        <div id='content' className='w-full text-justify font-[cursive] text-gray-700 pt-8 pr-8'>
+                        <div id='content' className='w-full text-justify text-gray-700 pt-8 pr-8 font-[cursive]'>
                             
                         </div></>:<Error type={1} />
                     }
@@ -77,7 +81,7 @@ export default () => {
                     {
                         list.slice(0,3).map(article => (
                             <div key={article.title} className=''>
-                                <Card news={{...article, title: article.title.slice(0,50) + '...'}} title={'Title 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                                <Card news={{...article, title: article.title.slice(0,50)+'...'}} title={'Title 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                             </div>
                         ))
                     }

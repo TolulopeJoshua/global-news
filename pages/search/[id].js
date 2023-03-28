@@ -11,42 +11,37 @@ export default () => {
 
     const [data, setData] = useState(null);
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true)
     const router = useRouter()
     const { id } = router.query
 
     useEffect(() => {
         if(data) {
-            let { content } = data;
-            // content = content.replace(/Search+.+ago/, '');
-            // content = content.replace(/\-[0-9]+\-0'\)\;\ \}\)\;/g, '');
-            // content = content.replaceAll('googletag.cmd.push(function() { googletag.display(\'div-gpt-ad', '');
-            content = content.replaceAll('\n', '<br>').split('. ');
+            let { body } = data;
+            // body = body.replace(/Search+.+ago/, '');
+            // body = body.replace(/\-[0-9]+\-0'\)\;\ \}\)\;/g, '');
+            // body = body.replaceAll('googletag.cmd.push(function() { googletag.display(\'div-gpt-ad', '');
+            body = body.replaceAll('\n', '<br>').split('. ');
             let index = 0;
-            while (index < content.length) {
+            while (index < body.length) {
                 index += 5;
-                content.splice(index,0,'<br ><br >')
+                body.splice(index,0,'<br ><br >')
             }
-            content = content.map(str => str == '<br ><br >' ? str : str+'. ').join('');
-            document.querySelector('#content').innerHTML = content;
+            body = body.map(str => str == '<br ><br >' ? str : str+'. ').join('');
+            document.querySelector('#content').innerHTML = body;
         }
         
     }, [data])
 
     useEffect(() => {
       if (id) {
-          const url = `/api/data/sports/${id}`
-          axios.get(url).then(res => {
-              setLoading(false);
-              setData(res.data.data);
-              setList(res.data.list);
-              // console.log(res.data)
-          }).catch(err => setLoading(false))
+        const savedList = JSON.parse(localStorage.getItem('searchData') || '[]');
+        const savedData = savedList.find(article => article.id == id);
+        setData(savedData);
+        setList(savedList.concat(savedList.splice(0,savedList.indexOf(savedData) + 1).slice(1)));
       }
     }, [id])
 
     if (!data && !list.length) {
-        if (loading)  return <Loader />
         return <Error />
     }
       

@@ -1,30 +1,31 @@
 import axios from 'axios'
 import { readFileSync, writeFileSync } from 'fs'
 
-import proxy from '../../utils/proxy';
-console.log(proxy)
-
 export default async function handler(req,  res) {
     if (req.method === 'POST' && req.headers.id === process.env.NEXT_SECRET_FIREBASE_APIKEY) {
         let timeKeeper;
-        let span = 1000 * 60 * 65;
-        const interval = setInterval(() => {
+        try {
+            timeKeeper = JSON.parse(readFileSync('/tmp/timeKeeper.json'))
+        } catch (error) { 
             try {
-                timeKeeper = JSON.parse(readFileSync('utils/timeKeeper.json'))
+                writeFileSync('/tmp/timeKeeper.json', JSON.stringify([new Date()]));
             } catch (error) { console.log(error) }
+        }
+        let span = 1000 * 60 * 75;
+        const interval = setInterval(() => {
     
             if (timeKeeper && timeKeeper.length) {
                 const latest = timeKeeper[0];
-                if ((new Date()) - (new Date(latest)) > (1000 * 60 * 62)) {
+                if ((new Date()) - (new Date(latest)) > (1000 * 60 * 70)) {
                     refresh()
                     timeKeeper.unshift(new Date())
-                    writeFileSync('utils/timeKeeper.json', JSON.stringify(timeKeeper.slice(0,50)));
+                    writeFileSync('/tmp/timeKeeper.json', JSON.stringify(timeKeeper.slice(0,50)));
                 } else {
                     console.log('cleared')
                     clearInterval(interval);
                 }
             } else {
-                writeFileSync('utils/timeKeeper.json', JSON.stringify([new Date()]));
+                writeFileSync('/tmp/timeKeeper.json', JSON.stringify([new Date()]));
                 clearInterval(interval);
             }
         }, span);
