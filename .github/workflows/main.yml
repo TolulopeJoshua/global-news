@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh world
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=world'
           method: 'POST'
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh sports
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=sports'
           method: 'POST'
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh business
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=business'
           method: 'POST'
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh health
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=health'
           method: 'POST'
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh top
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=top'
           method: 'POST'
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh science
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=science,technology'
           method: 'POST'
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh entertainment
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=entertainment'
           method: 'POST'
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh reel
-        uses: TolulopeJoshua/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=reel'
           method: 'POST'
