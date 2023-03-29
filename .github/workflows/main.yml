@@ -10,7 +10,7 @@ jobs:
       - name: Refresh world
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=world'
+          url: 'https://gipnews.vercel.app/api/refresh?section=world'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   sports:
@@ -19,7 +19,7 @@ jobs:
       - name: Refresh sports
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=sports'
+          url: 'https://gipnews.vercel.app/api/refresh?section=sports'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   business:
@@ -28,7 +28,7 @@ jobs:
       - name: Refresh business
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=business'
+          url: 'https://gipnews.vercel.app/api/refresh?section=business'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   health:
@@ -37,7 +37,7 @@ jobs:
       - name: Refresh health
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=health'
+          url: 'https://gipnews.vercel.app/api/refresh?section=health'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   top:
@@ -46,7 +46,7 @@ jobs:
       - name: Refresh top
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=top'
+          url: 'https://gipnews.vercel.app/api/refresh?section=top'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   science:
@@ -55,7 +55,7 @@ jobs:
       - name: Refresh science
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=science,technology'
+          url: 'https://gipnews.vercel.app/api/refresh?section=science,technology'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   entertainment:
@@ -64,7 +64,7 @@ jobs:
       - name: Refresh entertainment
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=entertainment'
+          url: 'https://gipnews.vercel.app/api/refresh?section=entertainment'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
   reel:
@@ -73,7 +73,7 @@ jobs:
       - name: Refresh reel
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/refresh?section=reel'
+          url: 'https://gipnews.vercel.app/api/refresh?section=reel'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
           
