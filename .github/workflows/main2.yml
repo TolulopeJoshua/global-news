@@ -49,10 +49,10 @@ jobs:
           url: 'https://gipnews.vercel.app/refresh?section=top'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
-  science,technology:
+  science:
     runs-on: ubuntu-latest
     steps:
-      - name: Refresh science,technology
+      - name: Refresh science
         uses: TolulopeJoshua/http-request-action@v1
         with:
           url: 'https://gipnews.vercel.app/refresh?section=science,technology'

@@ -12,7 +12,7 @@ export default async () => {
         const sectionPath = `/tmp/${section.split(',')[0]}.json`
         try {
             sectionData = JSON.parse(readFileSync(sectionPath)) || [];
-        } catch (error) { console.log(error) }
+        } catch (error) { console.log('db get') }
         if (sectionData.length < 40) {
             sectionData = [];
             if (section == 'reel') {

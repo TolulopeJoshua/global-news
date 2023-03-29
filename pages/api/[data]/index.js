@@ -14,7 +14,7 @@ export default async function handler(req,  res) {
             const sectionPath = `/tmp/${section?.split(',')[0]}.json`;
             try {
                 sectionData = JSON.parse(readFileSync(sectionPath)) || [];
-            } catch (error) { console.log(error) }
+            } catch (error) { console.log('db get') }
             data[section] = sectionData.filter(data => {
                 data.section = section;
                 return data.image_url;
