@@ -50,6 +50,8 @@ export default () => {
             key="desc"
           />
           <link rel="icon" href="/favicon.ico" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
         </Head>
         <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1000px] items-start py-4'>
             <div className='w-full sm:hidden'>

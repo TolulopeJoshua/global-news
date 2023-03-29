@@ -44,6 +44,8 @@ export default () => {
             key="desc"
           />
           <link rel="icon" href="/favicon.ico" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
         </Head>
         <section className='w-full aspect-video'>
         <iframe className='w-full h-full' src={`//www.youtube.com/embed/${data[0].id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

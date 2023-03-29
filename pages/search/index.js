@@ -61,6 +61,8 @@ export default () => {
         key="desc"
       />
       <link rel="icon" href="/favicon.ico" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
     </Head>
         <section className='border-b p-8 flex justify-center items-center'>
             <form onSubmit={search} className='w-10/12 md:w-8/12 relative'>

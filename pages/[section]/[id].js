@@ -64,6 +64,8 @@ export default () => {
             key="desc"
           />
           <link rel="icon" href="/favicon.ico" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
         </Head>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>

@@ -33,7 +33,7 @@ export default async () => {
                 } catch (error) { console.log(error) }
                 continue;
             }
-            const url = `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}.json`
+            const url = `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}.json?orderBy="pubDate"&limitToLast=100`
             const newsSection = (await axios.get(url)).data;
             for (let key in newsSection) {
                 sectionData.push(newsSection[key]);

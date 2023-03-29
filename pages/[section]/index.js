@@ -52,6 +52,8 @@ export default () => {
             key="desc"
           />
           <link rel="icon" href="/favicon.ico" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
         </Head>
         <section className='px-[3%] flex flex-wrap justify-center py-4'>
             <div className='w-full h-max sm:w-1/2 lg:w-2/3 xl:w-3/4'>   
