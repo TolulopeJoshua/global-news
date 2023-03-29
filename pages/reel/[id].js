@@ -13,6 +13,9 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Loader from '../../components/Loader'
 import Error from '../../components/Error'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
 
@@ -52,17 +55,17 @@ export default () => {
       
   return (
     <main className='overflow-x-clip'>
-    <Head>
-      <title>GIP News | {data?.title}</title>
-      <meta
-        name="description"
-        content={`Breaking news | Videos | ${data?.title}`}
-        key="desc"
-      />
-      <link rel="icon" href="/favicon.ico" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
-    </Head>
+        <Head>
+          <title>GIP News | {data?.title}</title>
+          <meta
+            name="description"
+            content={`Breaking news | Videos | ${data?.title}`}
+            key="desc"
+          />
+          <link rel="icon" href="/favicon.ico" />
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous"></script>
+        </Head>
         <section className='p-[3%] w-full relative flex bg-gray-700 text-gray-300'>
             <div className='w-3/4 px-2'>
                 {
@@ -80,6 +83,7 @@ export default () => {
                   </div>
                 ))
               }
+              <div className='p-1'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
         </section>
         <section className='px-[3%] h-fit w-full relative py-6 flex flex-col overflow-y-clip'>
@@ -117,6 +121,9 @@ export default () => {
               ))
             }
           </div>
+        </section>
+        <section className='px-[3%] mb-8'>
+          <Ads dataAdSlot={adConstants.horizontal} />
         </section>
     </main>
   )

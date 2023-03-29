@@ -11,6 +11,9 @@ import Error from '../../components/Error'
 import Card from '../../components/Card'
 import VCard from '../../components/VCard'
 import List from '../../components/List'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 import bg1 from '../../public/images/bg1.jpg'
 import bg2 from '../../public/images/bg2.jpg'
@@ -53,6 +56,7 @@ export default () => {
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
             crossorigin="anonymous"></script>
         </Head>
+        <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1000px] items-start py-4'>
             <div className='w-full sm:hidden'>
                 <Card news={data[0]} title={'Title 1'} desc={'description 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -63,8 +67,8 @@ export default () => {
             <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
               <List list={data.filter(article => !article.image_url).slice(0,4)} title='Sports Stories' />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/4 aspect-square bg-gray-50 p-2'>
-                AD
+            <div className='w-full sm:w-1/2 lg:w-1/4 aspect-square p-2'>
+                <Ads dataAdSlot={adConstants.square} />
             </div>
         </section>
         <section className='px-[3%] flex flex-wrap py-4'>
@@ -76,9 +80,6 @@ export default () => {
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
-              {/* <Card title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
             </div>
             {/* as this! */}
             <div className='hidden sm:flex items-start w-full lg:w-3/4'>
@@ -87,9 +88,6 @@ export default () => {
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               ))
               }
-              {/* <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
             </div>
             <div className='hidden lg:flex w-1/4'>
               <Card news={data[4]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -106,6 +104,7 @@ export default () => {
             <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
               <List list={data.filter(article => !article.image_url).slice(4,8)} title='More Stories' />
             </div>
+            <div className='w-full sm:w-1/2 lg:w-3/12 p-2'><Ads dataAdSlot={adConstants.square} /></div>
         </section>
         <section className='px-[3%] flex flex-wrap items-start py-4'>
             <div className='hidden md:flex md:w-1/2 xl:w-2/5'>
@@ -151,8 +150,8 @@ export default () => {
                 ))
               }
             </div>
-            <div className='hidden lg:flex w-1/4'>
-              AD
+            <div className='hidden lg:block w-1/4 p-2'>
+              <Ads dataAdSlot={adConstants.square}/>
             </div>
           </div>
         </section>
@@ -191,21 +190,23 @@ export default () => {
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
               {
-                data.slice(23,26).map(article => (
+                data.slice(23,25).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
+              <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
               {
-                data.slice(23,26).map(article => (
+                data.slice(23,25).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
+              <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card news={data[26]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data[25]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
@@ -254,10 +255,10 @@ export default () => {
                   <VCard key={vid.title} video={vid} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
-              {/* <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <VCard title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
             </div>
+        </section>
+        <section className='px-[3%] mb-8'>
+          <Ads dataAdSlot={adConstants.horizontal} />
         </section>
     </main> 
   )

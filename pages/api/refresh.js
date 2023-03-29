@@ -9,7 +9,7 @@ export default async function handler(req,  res) {
     if (req.method !== 'POST' || req.headers.id !== process.env.NEXT_SECRET_FIREBASE_APIKEY) {
         return res.status(400).send();
     }
-    await refresher();
+    // await refresher();
     let count = 0, ins = 0;
     let {section} = req.query;
     // for (let section of sections) {
@@ -26,7 +26,13 @@ export default async function handler(req,  res) {
         const sectionPath = `/tmp/${section.split(',')[0]}.json`;
         try {
             sectionData = JSON.parse(readFileSync(sectionPath)) || [];
-        } catch (error) { writeFileSync(sectionPath, '[]') }
+        } catch (error) { 
+            const url = `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}.json?orderBy="pubDate"&limitToLast=100`
+            const newsSection = (await axios.get(url)).data;
+            for (let key in newsSection) {
+                sectionData.push(newsSection[key]);
+            }
+         }
         try {
             if (section == 'reel') {
                 const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=snippet&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=25&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`;

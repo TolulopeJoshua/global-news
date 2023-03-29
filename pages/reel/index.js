@@ -15,6 +15,9 @@ import bg1 from '../../public/images/bg1.jpg'
 import bg2 from '../../public/images/bg2.jpg'
 import bg3 from '../../public/images/bg3.jpg'
 import Head from 'next/head'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
   const [data, setData] = useState(null);
@@ -154,6 +157,9 @@ export default () => {
               ))
             }
           </div>
+        </section>
+        <section className='px-[3%] h-fit w-full relative my-8 py-6 flex flex-col overflow-y-clip'>
+          <Ads dataAdSlot={adConstants.horizontal} />
         </section>
     </main>
   )

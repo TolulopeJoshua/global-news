@@ -12,6 +12,9 @@ import VCard from '../components/VCard'
 import List from '../components/List'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
+import Ads from '../components/Ads'
+
+import adConstants from '../utils/adConstants'
 
 import bg1 from '../public/images/bg1.jpg'
 import bg2 from '../public/images/bg2.jpg'
@@ -74,7 +77,7 @@ const Home = () => {
   }
   
   return (
-      <main className="w-full py-[3%] min-h-screen overflow-hidden">
+      <main className="w-full overflow-hidden">
         <Head>
           <title>GIP News | Homepage</title>
           <meta
@@ -86,7 +89,8 @@ const Home = () => {
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
             crossorigin="anonymous"></script>
         </Head>
-        <section className='px-[3%] flex justify-between py-2 text-xl text-gray-600'>
+        <div><Ads dataAdSlot={adConstants.horizontal} /></div>
+        <section className='px-[3%] flex justify-between pt-8 text-xl text-gray-600'>
           <h1 className='font-bold px-2'>Welcome to GIP News</h1>
           <span className='px-2'>{(new Date()).toUTCString().slice(0,11)}</span>
         </section>
@@ -105,9 +109,12 @@ const Home = () => {
           </div>
         </section>
         <section className='px-[3%] flex flex-wrap sm:flex-row-reverse justify-center py-4'>
-          <div className='w-full lg:w-1/3 h-full lg:sticky top-0 lg:pt-10 p-2'>
-            <div className='bg-gray-300 h-screen'>
-              <p>Advertisement</p>
+          <div className='w-full lg:w-1/3 h-max lg:pt-10 p-2'>
+            <div className=''>
+              <Ads dataAdSlot={adConstants.square}/>
+            </div>
+            <div className='pt-4'>
+              <Ads dataAdSlot={adConstants.square}/>
             </div>
             <div className='py-4'>
               <div className='px-2 py-4 flex flex-col sm:flex-row gap-3'>
@@ -226,6 +233,9 @@ const Home = () => {
               }
             </div>
         </section>
+        <section className='px-[3%] h-fit w-full relative my-8 py-2 flex flex-col overflow-y-clip'>
+          <Ads dataAdSlot={adConstants.horizontal} />
+        </section>
         <section className='px-[3%] pb-6'>
           <div className='flex align-center p-2 gap-1'>
             <span className='text-xl font-extrabold text-blue-800'>|</span>
@@ -289,6 +299,7 @@ const Home = () => {
             <div className=''>
               <List title={'Business News'} list={data.business.slice(4,8)} />
             </div>
+            <div className='pt-4'><Ads dataAdSlot={adConstants.square} /></div>
           </div>
         </section>
         <section className='px-[3%] h-fit w-full relative my-8 py-6 flex flex-col overflow-y-clip'>
@@ -326,7 +337,7 @@ const Home = () => {
               <Card news={data.business[2]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:w-full lg:w-1/3 sm:order-first lg:order-none'>
-              <span>Ad</span>
+              <div className='p-2'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             <div className='w-full sm:w-1/2 lg:w-1/3'>
               <Card news={data.business[3]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />

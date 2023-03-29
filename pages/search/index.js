@@ -9,6 +9,9 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import Card from '../../components/Card'
 import Error from '../../components/Error'
 import Paginate from '../../components/Paginate'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
 
@@ -53,17 +56,18 @@ export default () => {
 
   return (
     <main>
-    <Head>
-      <title>GIP News | Search</title>
-      <meta
-        name="description"
-        content="Breaking news, latest news, search."
-        key="desc"
-      />
-      <link rel="icon" href="/favicon.ico" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
-    </Head>
+        <Head>
+        <title>GIP News | Search</title>
+        <meta
+            name="description"
+            content="Breaking news, latest news, search."
+            key="desc"
+        />
+        <link rel="icon" href="/favicon.ico" />
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous"></script>
+        </Head>
+        <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='border-b p-8 flex justify-center items-center'>
             <form onSubmit={search} className='w-10/12 md:w-8/12 relative'>
                 <input value={query} onChange={e => setQuery(e.target.value)} className='w-full h-12 border p-3 font-semibold text-lg' placeholder='Search News' />
@@ -73,8 +77,12 @@ export default () => {
         <section className='px-[3%] flex flex-col items-center py-8'>
             {
                 error ? <Error message='Search engine temporarily busy.' /> :
-                data.slice(start,end).map(article => (
+                data.slice(start,end).map((article, index) => (
                     <div key={article.id} id={article.id} className='flex flex-col w-full sm:w-3/4 lg:w-1/2 relative'>
+                        {
+                            index % 3 == 2 && 
+                            <div className='p-2'><Ads dataAdSlot={adConstants.square} /></div>
+                        }
                         <Card news={{...article, image_url: article.image.url, section: 'search'}} title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                         <span className='absolute hidden sm:block bottom-2 p-2 text-gray-400 text-sm left-1/2'> | {(new Date(article.datePublished)).toUTCString()}</span>
                     </div>

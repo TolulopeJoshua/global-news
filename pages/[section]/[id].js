@@ -7,6 +7,9 @@ import axios from 'axios'
 import Card from '../../components/Card'
 import Loader from '../../components/Loader'
 import Error from '../../components/Error'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
 
@@ -56,17 +59,18 @@ export default () => {
 
   return (
         <main>
-        <Head>
-          <title>GIP News | {data?.title}</title>
-          <meta
-            name="description"
-            content={`Breaking news | latest news | ${data?.description}`}
-            key="desc"
-          />
-          <link rel="icon" href="/favicon.ico" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
-        </Head>
+            <Head>
+            <title>GIP News | {data?.title}</title>
+            <meta
+                name="description"
+                content={`Breaking news | latest news | ${data?.description}`}
+                key="desc"
+            />
+            <link rel="icon" href="/favicon.ico" />
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous"></script>
+            </Head>
+            <div><Ads dataAdSlot={adConstants.horizontal} /></div>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>
                     {
@@ -79,7 +83,7 @@ export default () => {
                         </div></>:<Error type={1} />
                     }
                 </div>
-                <div className='hidden w-1/4 lg:flex lg:flex-col px-2'>
+                <div className='hidden w-1/4 h-full lg:flex lg:flex-col px-2'>
                     {
                         list.slice(0,3).map(article => (
                             <div key={article.title} className=''>
@@ -87,30 +91,34 @@ export default () => {
                             </div>
                         ))
                     }
+                    <div className='p-2 h-full'><Ads dataAdSlot={adConstants.vertical} /></div>
+                    <div className='p-2'><Ads dataAdSlot={adConstants.vertical} /></div>
                 </div>
             </section>
             <section className='px-[3%] flex flex-wrap py-4'>
-            <div className='flex items-start w-full'>
-                {/* constains the same cards */}
-                <div className='flex flex-col w-full sm:hidden'>
-                    {
-                        list.slice(3,6).map(article => (
-                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-                        ))
-                    }
+                <div className='flex items-start w-full'>
+                    {/* constains the same cards */}
+                    <div className='flex flex-col w-full sm:hidden'>
+                        {
+                            list.slice(3,5).map(article => (
+                                <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                            ))
+                        }
+                        <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
+                    </div>
+                    {/* as this! */}
+                    <div className='hidden sm:flex w-full lg:w-3/4'>
+                        {
+                            list.slice(3,5).map(article => (
+                                <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                            ))
+                        }
+                        <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
+                    </div>
+                    <div className='hidden lg:flex w-1/4'>
+                        <Card news={list[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                    </div>
                 </div>
-                {/* as this! */}
-                <div className='hidden sm:flex w-full lg:w-3/4'>
-                    {
-                        list.slice(3,6).map(article => (
-                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-                        ))
-                    }
-                </div>
-                <div className='hidden lg:flex w-1/4'>
-                    <Card news={list[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-                </div>
-            </div>
             </section>
             <section className='px-[3%] flex flex-wrap items-start py-4'>
                 <div className='hidden md:flex md:w-1/2 xl:w-2/5'>
@@ -135,8 +143,9 @@ export default () => {
                     <Card news={list[12]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 </div>
                 <div className='w-full sm:w-1/2 md:w-1/4 xl:w-1/5'>
-                    <Card news={list[13]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                    <Card news={list[5]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 </div>
+                <div className='w-full p-2'><Ads dataAdSlot={adConstants.horizontal} /></div>
             </section>
         </main>
     )

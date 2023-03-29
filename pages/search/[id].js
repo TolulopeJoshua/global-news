@@ -5,7 +5,9 @@ import React, { useEffect, useState } from 'react'
 
 import Card from '../../components/Card'
 import Error from '../../components/Error'
-import Loader from '../../components/Loader'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
 
@@ -58,6 +60,7 @@ export default () => {
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
                     crossorigin="anonymous"></script>
             </Head>
+            <div><Ads dataAdSlot={adConstants.horizontal} /></div>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>
                     {
@@ -78,6 +81,7 @@ export default () => {
                             </div>
                         ))
                     }
+                    <div className='p-2'><Ads dataAdSlot={adConstants.square} /></div>
                 </div>
             </section>
             <section className='px-[3%] flex flex-wrap py-4'>
@@ -85,18 +89,20 @@ export default () => {
                 {/* constains the same cards */}
                 <div className='flex flex-col w-full sm:hidden'>
                     {
-                        list.slice(3,6).map(article => (
+                        list.slice(3,5).map(article => (
                             <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                         ))
                     }
+                    <div className='p-2 w-full'><Ads dataAdSlot={adConstants.square} /></div>
                 </div>
                 {/* as this! */}
                 <div className='hidden sm:flex w-full lg:w-3/4'>
                     {
-                        list.slice(3,6).map(article => (
+                        list.slice(3,5).map(article => (
                             <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                         ))
                     }
+                    <div className='p-2 w-full'><Ads dataAdSlot={adConstants.square} /></div>
                 </div>
                 <div className='hidden lg:flex w-1/4'>
                     <Card news={list[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -126,8 +132,11 @@ export default () => {
                     <Card news={list[12]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 </div>
                 <div className='w-full sm:w-1/2 md:w-1/4 xl:w-1/5'>
-                    <Card news={list[13]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                    <Card news={list[5]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 </div>
+            </section>
+            <section className='px-[3%] mb-8'>
+                <Ads dataAdSlot={adConstants.horizontal} />
             </section>
         </main>
     )

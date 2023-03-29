@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import axios from 'axios'
 
@@ -7,7 +8,9 @@ import Card from '../../components/Card'
 import Loader from '../../components/Loader'
 import Error from '../../components/Error'
 import Paginate from '../../components/Paginate'
-import Head from 'next/head'
+import Ads from '../../components/Ads'
+
+import adConstants from '../../utils/adConstants'
 
 export default () => {
   const router = useRouter()
@@ -18,7 +21,7 @@ export default () => {
   const [loading, setLoading] = useState(true);
 
   const list = useRef(null)
-  const listData = data?.slice(((page - 1) * 20 + 16), (page * 20 + 16)) || [];
+  const listData = data?.slice(((page - 1) * 20 + 15), (page * 20 + 15)) || [];
 
   useEffect(() => {
     list.current?.scrollIntoView();
@@ -55,7 +58,8 @@ export default () => {
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
             crossorigin="anonymous"></script>
         </Head>
-        <section className='px-[3%] flex flex-wrap justify-center py-4'>
+        <div><Ads dataAdSlot={adConstants.horizontal} /></div>
+        <section className='px-[3%] flex flex-wrap justify-center py-4 h-max'>
             <div className='w-full h-max sm:w-1/2 lg:w-2/3 xl:w-3/4'>   
                 <div className='flex flex-wrap w-full pb-4 items-start'>
                     <div className='w-full sm:w-full lg:w-2/3'>
@@ -75,10 +79,9 @@ export default () => {
                   }
                 </div>
             </div>
-            <div className='w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 h-full p-2'>
-                <div className='bg-gray-300 h-screen'>
-                    <p>Advertisement</p>
-                </div>
+            <div className='w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2 flex flex-col gap-4 sticky top-2'>
+              <Ads dataAdSlot={adConstants.square} />
+              <Ads dataAdSlot={adConstants.square} />
             </div>
         </section>
         <section className='px-[3%] flex flex-wrap py-4'> 
@@ -86,18 +89,20 @@ export default () => {
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
               {
-                data.slice(8,11).map(article => (
+                data.slice(8,10).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
+              <div className='w-full'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
               {
-                data.slice(8,11).map(article => (
+                data.slice(8,10).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
+              <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             <div className='hidden lg:flex w-1/4'>
               <Card news={data[11]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -123,7 +128,7 @@ export default () => {
               }
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card news={data[15]} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data[10]} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
@@ -149,26 +154,27 @@ export default () => {
                 ))
               }
             </div>
-            <div className='hidden lg:flex w-1/4'>
-              <Card news={reel[3]} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <div className='hidden lg:block w-1/4 p-2'>
+              <Ads dataAdSlot={adConstants.square} />
             </div>
           </div>
         </section>
         <section ref={list} className='px-[3%] flex flex-col divide-y items-center py-4'>
           <div className='border-t border-gray-400 w-full'></div>
-          <div className='flex flex-col w-full py-8 sm:w-3/4 lg:w-1/2'>
-            <Card news={listData[0]} title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-          </div>
           {
-            listData.slice(1).map(article => (
+            listData.map((article, index) => (
               <div className='flex flex-col w-full py-8 sm:w-3/4 lg:w-1/2 relative'>
-                <Card news={article} title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-                <span className='absolute hidden sm:block bottom-2 p-2 text-gray-400 text-sm left-1/2'> | {(new Date(article.datePublished)).toUTCString()}</span>
+                {
+                  index % 3 == 2 && 
+                  <div className='px-2 pt-0 pb-4'><Ads dataAdSlot={adConstants.square} /></div>
+                }
+              <Card news={article} title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                <span className='absolute hidden sm:block bottom-10 p-2 text-gray-400 text-sm left-1/2'> | {(new Date(article.pubDate)).toUTCString()}</span>
               </div>
             ))
           }
           <div className='w-full py-8'>
-            <Paginate page={parseInt(page)} pages={Math.ceil((data.length - 16) / 20)} pathname={`/${section}`} />
+            <Paginate page={parseInt(page)} pages={Math.ceil((data.length - 15) / 20)} pathname={`/${section}`} />
           </div>
         </section>
         <section className='px-[3%]'>
