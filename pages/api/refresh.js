@@ -53,6 +53,7 @@ export default async function handler(req,  res) {
                             return (new Date(b.pubDate) - (new Date(a.pubDate)))
                         }))); 
                     } catch (error) { console.log(error) }
+                    console.log(section, sectionData.length)
                 }).catch(error => console.log(error))
             } else {
                 let response = await axios.request(options)
