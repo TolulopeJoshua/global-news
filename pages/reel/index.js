@@ -79,7 +79,7 @@ export default () => {
             <span className='text-5xl'><MdOutlineFeaturedPlayList /></span>
             <div className='flex gap-6 items-center'>
               <hr className='w-28' />
-              <h3 className='text-gray-700 text-4xl font-bold'>Top Picks</h3>
+              <h3 className='text-gray-700 text-4xl font-bold text-center'>Top Picks</h3>
               <hr className='w-28' />
             </div>
             <span className='text-lg'>A selection of feature Videos</span>

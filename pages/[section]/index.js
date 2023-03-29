@@ -165,7 +165,7 @@ export default () => {
             listData.map((article, index) => (
               <div className='flex flex-col w-full py-8 sm:w-3/4 lg:w-1/2 relative'>
                 {
-                  index % 3 == 2 && 
+                  index % 4 == 3 && 
                   <div className='px-2 pt-0 pb-4'><Ads dataAdSlot={adConstants.square} /></div>
                 }
               <Card news={article} title={'Title 1'} desc={'description 1'} right={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />

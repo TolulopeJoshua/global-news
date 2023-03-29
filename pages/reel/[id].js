@@ -67,7 +67,7 @@ export default () => {
                 crossorigin="anonymous"></script>
         </Head>
         <section className='p-[3%] w-full relative flex bg-gray-700 text-gray-300'>
-            <div className='w-3/4 px-2'>
+            <div className='w-full lg:w-3/4 px-2'>
                 {
                     data ? <>
                     <iframe className='w-full aspect-video' src={`//www.youtube.com/embed/${data?.id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -101,7 +101,7 @@ export default () => {
             <span className='text-5xl'><MdOutlineFeaturedPlayList /></span>
             <div className='flex gap-6 items-center'>
               <hr className='w-28' />
-              <h3 className='text-gray-700 text-4xl font-bold'>Top Picks</h3>
+              <h3 className='text-gray-700 text-4xl font-bold text-center'>Top Picks</h3>
               <hr className='w-28' />
             </div>
             <span className='text-lg'>A selection of feature Videos</span>

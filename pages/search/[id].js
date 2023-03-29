@@ -68,7 +68,7 @@ export default () => {
                         <h1 className='pb-8 text-gray-700 text-4xl font-bold'>{data.title}</h1>
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
-                        <div id='content' className='w-full text-justify font-[cursive] text-gray-700 pt-8 pr-8'>
+                        <div id='content' className='w-full text-justify font-[Noticia] text-gray-700 pt-8 pr-8'>
                             
                         </div></>:<Error type={1} />
                     }
@@ -90,7 +90,7 @@ export default () => {
                 <div className='flex flex-col w-full sm:hidden'>
                     {
                         list.slice(3,5).map(article => (
-                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                         ))
                     }
                     <div className='p-2 w-full'><Ads dataAdSlot={adConstants.square} /></div>
@@ -99,13 +99,13 @@ export default () => {
                 <div className='hidden sm:flex w-full lg:w-3/4'>
                     {
                         list.slice(3,5).map(article => (
-                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                            <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                         ))
                     }
                     <div className='p-2 w-full'><Ads dataAdSlot={adConstants.square} /></div>
                 </div>
                 <div className='hidden lg:flex w-1/4'>
-                    <Card news={list[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                    <Card news={list[6]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 </div>
             </div>
             </section>
