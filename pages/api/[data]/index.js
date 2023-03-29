@@ -11,7 +11,7 @@ export default async function handler(req,  res) {
         const data = {};
         for (let section of sections) {
             let sectionData = [];
-            const sectionPath = `/tmp/${section.split(',')[0]}.json`;
+            const sectionPath = `/tmp/${section?.split(',')[0]}.json`;
             try {
                 sectionData = JSON.parse(readFileSync(sectionPath)) || [];
             } catch (error) { console.log(error) }
