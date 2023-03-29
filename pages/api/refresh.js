@@ -76,7 +76,7 @@ export default async function handler(req,  res) {
                             const key = [
                                 process.env.NEXT_SECRET_C1, process.env.NEXT_SECRET_C2,
                                 process.env.NEXT_SECRET_C3, process.env.NEXT_SECRET_C4,
-                            ][sects.indexOf(section) % 4]
+                            ][c % 4]
                             const options = {
                                 method: 'GET',
                                 url: 'https://extract-news.p.rapidapi.com/v0/article',
