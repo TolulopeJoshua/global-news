@@ -6,7 +6,7 @@ on:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - name: Refresh world
         uses: fjogeleit/http-request-action@v1
