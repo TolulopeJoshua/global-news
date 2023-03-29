@@ -11,9 +11,7 @@ export default async function handler(req,  res) {
     }
     // await refresher();
     let count = 0, ins = 0;
-    let {section} = req.query; let c = sects.indexOf(section);
-    if (c < 0) return res.status(404).send('section not found');
-    section = section.split(','[0]);
+    let {section} = req.query;
     // for (let section of sections) {
         const options = {
             method: 'GET',
@@ -77,7 +75,7 @@ export default async function handler(req,  res) {
                             const key = [
                                 process.env.NEXT_SECRET_C1, process.env.NEXT_SECRET_C2,
                                 process.env.NEXT_SECRET_C3, process.env.NEXT_SECRET_C4,
-                            ][c % 4]
+                            ][sects.indexOf(section) % 4]
                             const options = {
                                 method: 'GET',
                                 url: 'https://extract-news.p.rapidapi.com/v0/article',
