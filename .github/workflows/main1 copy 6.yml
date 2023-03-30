@@ -13,3 +13,4 @@ jobs:
           url: 'https://gipnews.vercel.app/api/refresh?section=entertainment'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+          timeout: 10000
