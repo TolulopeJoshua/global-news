@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -8,18 +8,16 @@ import { BsDot } from 'react-icons/bs'
 import sections from '../utils/sections'
 import Link from 'next/link'
 import Image from 'next/image'
-// [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
+import { useDispatch } from 'react-redux';
+import { dataActions } from '../store/index';
+import axios from 'axios'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function () {
+  const dispatch = useDispatch();
   const router = useRouter()
   const { section: currSection } = router.query
 
@@ -29,6 +27,14 @@ export default function () {
       current: (section == currSection) || router.pathname.includes(section)
   }))
   navigation.unshift({name: 'Home', href:'/', current: router.pathname == '/'})
+
+  useEffect(() => {
+    axios.get('/api/data').then(response => {
+      dispatch(dataActions.setData(response.data));
+      dispatch(dataActions.setLoading(false));
+      // console.log(response.data)
+    }).catch(e => dispatch(dataActions.setLoading(false)));
+  }, [])
 
   return (
     <Disclosure as="nav" className="bg-gray-800">

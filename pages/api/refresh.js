@@ -29,7 +29,7 @@ export default async function handler(req,  res) {
                 const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=snippet&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=25&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`;
                 axios.get(url).then(response => {
                     let { items } = response.data;
-                    console.log(section, items.length)
+                    console.log(section, items.length);
                     sectionData = items.map(video => {
                         const {
                             id, snippet: {title, description, publishedAt: pubDate, 
@@ -41,7 +41,7 @@ export default async function handler(req,  res) {
                         writeFileSync(sectionPath, JSON.stringify(sectionData.sort((a,b) => {
                             return (new Date(b.pubDate) - (new Date(a.pubDate)))
                         }))); 
-                    } catch (error) { console.log(error) }
+                    } catch (error) { console.log('could not write to file') }
                 }).catch(error => console.log(error))
             } else {
                 try {

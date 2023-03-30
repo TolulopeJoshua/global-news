@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Image from 'next/image'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
@@ -20,18 +21,10 @@ import Ads from '../../components/Ads'
 import adConstants from '../../utils/adConstants'
 
 export default () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-      const url = `/api/data/reel`
-      axios.get(url).then(res => {
-        console.log(res.data)
-        setData(res.data.data);
-        setLoading(false);
-      }).catch(err => setLoading(false));
-  }, [])
-
+  
+  let { data, loading } = useSelector(({data}) => data);
+  data = data?.reel;
+  
   if (!data) {
     if (loading) return <Loader />
     return <Error />

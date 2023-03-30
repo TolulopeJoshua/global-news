@@ -10,14 +10,20 @@ import Error from '../../components/Error'
 import Ads from '../../components/Ads'
 
 import adConstants from '../../utils/adConstants'
+import { useSelector } from 'react-redux'
 
 export default () => {
 
     const [data, setData] = useState(null);
-    const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true)
+    // const [list, setList] = useState([]);
+    // const [loading, setLoading] = useState(true)
     const router = useRouter();
     const { section, id } = router.query;
+
+    let { data: obj, loading } = useSelector(({data}) => data);
+    const sectionData = obj && section ? [...obj[section]] : null;
+    const dat = (sectionData?.find(article => id && (article.id == id)));
+    const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
 
     useEffect(() => {
         if(data) {
@@ -37,20 +43,18 @@ export default () => {
             }
             document.querySelector('#content').innerHTML = content;
         }
-        
     }, [data])
   
     useEffect(() => {
-        if (section && id) {
+        if (!loading && !dat) {
             const url = `/api/data/${section}/${id}`
             axios.get(url).then(res => {
-                setLoading(false);
-                setData(res.data.data);
-                setList(res.data.list);
-                // console.log(res.data)
-            }).catch(err => setLoading(false))
+                setData(res.data);
+            }).catch(err => console.log('data not found'))
+        } else {
+            setData(dat)
         }
-    }, [section, id])
+    }, [loading, id])
 
     if (!data && !list.length) {
         if (loading)  return <Loader />

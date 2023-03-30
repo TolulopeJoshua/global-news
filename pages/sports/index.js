@@ -18,30 +18,37 @@ import adConstants from '../../utils/adConstants'
 import bg1 from '../../public/images/bg1.jpg'
 import bg2 from '../../public/images/bg2.jpg'
 import bg3 from '../../public/images/bg3.jpg'
+import { useSelector } from 'react-redux'
 
 export default () => {
-  const [data, setData] = useState(null);
-  const [features, setFeatures] = useState([]);
-  const [reel, setReel] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState(null);
+  // const [features, setFeatures] = useState([]);
+  // const [reel, setReel] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [vBg, setVBg] = useState(bg1)
 
+  const dataObject = useSelector(({data}) => data);
+  const sortByImage = (a,b) => ((a.image_url && !b.image_url) ? -1 : (b.image_url && !a.image_url) ? 1 : 0);
+  
+  let data = null, features = [], reel = [], { loading } = dataObject;
+  const section = 'sports';
+  for (let sect in dataObject.data) {
+    const sectData = [...dataObject.data[sect]].sort(sortByImage);
+    if (sect == section.split(',')[0]) {
+      data = sectData;
+    } else  {
+      if (sect == 'reel') (reel = sectData.slice(1));
+      features.push(sectData[0]);
+    } 
+  }
   useEffect(() => {
-    const url = `/api/data/sports`
-    axios.get(url).then(res => {
-      // console.log(res.data)
-      setData(res.data.data);
-      setFeatures(res.data.features);
-      setReel(res.data.reel);
-      setLoading(false);
-    }).catch(err => setLoading(false))
-      setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
-    }, [])
+    setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
+  }, [])
 
-    if (!data) {
-      if (loading) return <Loader />
-      return <Error />
-    }
+  if (!data) {
+    if (loading) return <Loader />
+    return <Error />
+  }
 
   return (
     <main className='overflow-x-clip'>

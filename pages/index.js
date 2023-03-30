@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -28,9 +29,9 @@ const Home = () => {
   const [notFound, setNotFound] = useState(false);
   const [weatherData, setWeatherData] = useState([]);
   const [vBg, setVBg] = useState(bg1)
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   // console.log(weatherData)
+  
+  const {data, loading} = useSelector(({data}) => data);
 
   const getWeather = (location) => {
     axios.get(`/api/weather?location=${location}`)
@@ -53,19 +54,13 @@ const Home = () => {
   }
 
   useEffect(() => {
-      axios.get('/api/location').then(res => {
-        res.data && setCity(res.data)
-        getWeather(res.data || city);
-      }).catch(err => console.log(err))
-      setGuess({number:Math.floor(Math.random() * 100)+1, input:0, attempts:0, result:0})
-      setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
-
-      axios.get('/api/data').then(res => {
-        // console.log(res.data)
-        setData(res.data);
-        setLoading(false)
-      }).catch(err => setLoading(false))
-    }, [])
+    axios.get('/api/location').then(res => {
+      res.data && setCity(res.data)
+      getWeather(res.data || city);
+    }).catch(err => console.log(err))
+    setGuess({number:Math.floor(Math.random() * 100)+1, input:0, attempts:0, result:0})
+    setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
+  }, [])
     
   function dayString(date) {
     return (new Date(date)).toString().slice(0,3)

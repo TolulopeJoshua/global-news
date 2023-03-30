@@ -8,15 +8,15 @@ export default async function handler(req,  res) {
         if (req.headers.host != req.headers.referer?.split('/')[2]) {
             return res.end();
         }
-        await refresher();
-        let sectionData = [];
+        // await refresher();
+        // let sectionData = [];
         const { section, id } = req.query
-        const sectionPath = `/tmp/${section?.split(',')[0]}.json`;
-        try {
-            sectionData = JSON.parse(readFileSync(sectionPath)) || [];
-        } catch (error) { console.log(error) }
-        let data = sectionData.find(art => art.id == id);
-        if (!data) {
+        // const sectionPath = `/tmp/${section?.split(',')[0]}.json`;
+        // try {
+        //     sectionData = JSON.parse(readFileSync(sectionPath)) || [];
+        // } catch (error) { }
+        let data; // = sectionData.find(art => art.id == id);
+        // if (!data) {
             if (section == 'reel') {
                 const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=snippet&part=contentDetails&part=status&id=${id}&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`;
                 let response = await axios.get(url)
@@ -32,9 +32,9 @@ export default async function handler(req,  res) {
                 const url = `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}/${id}.json`
                 data = (await axios.get(url)).data;
             }
-        }
-        sectionData = sectionData.concat(sectionData.splice(0,sectionData.indexOf(data)))
-            .filter(dat => (dat.id != data?.id) && dat.image_url).map(data => ({...data, section}))
-        res.status(200).send({data: data ? {...data, section}:null, list: sectionData })
+        // }
+        // sectionData = sectionData.concat(sectionData.splice(0,sectionData.indexOf(data)))
+        //     .filter(dat => (dat.id != data?.id) && dat.image_url).map(data => ({...data, section}))
+        res.status(200).send(data ? {...data, section} : null);
     }
 }

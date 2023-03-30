@@ -9,14 +9,20 @@ import Loader from '../../components/Loader'
 import Ads from '../../components/Ads'
 
 import adConstants from '../../utils/adConstants'
+import { useSelector } from 'react-redux'
 
 export default () => {
 
     const [data, setData] = useState(null);
-    const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true)
-    const router = useRouter()
-    const { id } = router.query
+    // const [list, setList] = useState([]);
+    // const [loading, setLoading] = useState(true)
+    const router = useRouter();
+    const { id } = router.query, section = 'sports';
+
+    let { data: obj, loading } = useSelector(({data}) => data);
+    const sectionData = obj && section ? [...obj[section]] : null;
+    const dat = (sectionData?.find(article => id && (article.id == id)));
+    const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
 
     useEffect(() => {
         if(data) {
@@ -35,18 +41,17 @@ export default () => {
         }
         
     }, [data])
-
+  
     useEffect(() => {
-      if (id) {
-          const url = `/api/data/sports/${id}`
-          axios.get(url).then(res => {
-              setLoading(false);
-              setData(res.data.data);
-              setList(res.data.list);
-              // console.log(res.data)
-          }).catch(err => setLoading(false))
-      }
-    }, [id])
+        if (!loading && !dat) {
+            const url = `/api/data/${section}/${id}`
+            axios.get(url).then(res => {
+                setData(res.data);
+            }).catch(err => console.log('data not found'))
+        } else {
+            setData(dat)
+        }
+    }, [loading, id])
 
     if (!data && !list.length) {
         if (loading)  return <Loader />
