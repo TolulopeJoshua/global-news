@@ -30,8 +30,9 @@ function MyApp({ Component, pageProps }) {
   const open = () => {
     document.querySelector('#su').style.transform = 'translate(0,0)';
   }
-  const close = () => {
+  const close = (e) => {
     document.querySelector('#su').style.transform = 'translate(-200px, 200px)';
+    e?.stopPropagation();
   }
 
   React.useEffect(() => {

@@ -24,7 +24,7 @@ export default () => {
   if (section) {
     for (let sect in dataObject.data) {
       const sectData = [...dataObject.data[sect]].sort(sortByImage);
-      if (sect == section.split(',')[0]) {
+      if (sect == section) {
         data = sectData;
       } else  {
         if (sect == 'reel') (reel = sectData.slice(1));
