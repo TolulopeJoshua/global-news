@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             const user = result.user;
             localStorage.setItem('user', JSON.stringify(user));
           }).catch((error) => {
-            toast.error('Error retrieving info')
+            // toast.error('Error retrieving info')
           });
       }
     }, 20*1000);
