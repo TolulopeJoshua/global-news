@@ -5,7 +5,9 @@ import { readFileSync } from 'fs';
 
 export default async function handler(req,  res) {
     if (req.method === 'GET') {
-        originf(req, res);
+        if (req.headers.host != req.headers.referer?.split('/')[2]) {
+            return res.end();
+        }
         await refresher();
 
         const data = {};
