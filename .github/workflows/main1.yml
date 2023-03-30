@@ -1,0 +1,80 @@
+
+name: Refresh GIP News
+on:
+  schedule:
+    - cron: "10 * * * *"
+jobs:
+  world:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Refresh world
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=world'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  sports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh sports
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=sports'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  business:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh business
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=business'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh health
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=health'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  top:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh top
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=top'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  science:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh science
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=science,technology'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  entertainment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh entertainment
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=entertainment'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+  reel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh reel
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/refresh?section=reel'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
+          
