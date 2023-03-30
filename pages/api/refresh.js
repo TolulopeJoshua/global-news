@@ -64,7 +64,7 @@ export default async function handler(req,  res) {
                                 'colombopage',
                             ].filter(src => article.link.includes(src)).length) return false;
                         return (!(sectionData.map(data => data.title).includes(article.title)));
-                    }).sort((a,b) => (new Date(b.pubDate) - (new Date(a.pubDate)))).slice(0,2);
+                    }).sort((a,b) => (new Date(b.pubDate) - (new Date(a.pubDate)))).slice(0,1);
                     console.log(section, results.length)
                     for (let result of results) {
                         let {title, link, description, content, pubDate, image_url, id} = result;
