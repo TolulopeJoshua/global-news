@@ -43,11 +43,12 @@ export default async function handler(req,  res) {
                     sectionData.push(newsSection[key]);
                 }
             }
-            data[section] = sectionData.sort((a,b) => {
-                const val = (a.image_url && !b.image_url) ? -1 :
-                            (b.image_url && !a.image_url) ? 1 : 0
-                return val;
-            }).map(art => ({...art, section}));
+            data[section] = sectionData.sort((a,b) => (new Date(b.pubDate) - (new Date(a.pubDate))))
+                .sort((a,b) => {
+                    const val = (a.image_url && !b.image_url) ? -1 :
+                                (b.image_url && !a.image_url) ? 1 : 0
+                    return val;
+                }).map(art => ({...art, section}));
             try {
                 writeFileSync(sectionPath, JSON.stringify(data[section])); 
             } catch (error) { console.log('could not write to file') }
