@@ -1,5 +1,5 @@
 
-name: Refresh GIP News
+name: health
 on:
   schedule:
     - cron: "28 * * * *"

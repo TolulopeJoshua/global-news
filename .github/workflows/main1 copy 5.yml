@@ -1,5 +1,5 @@
 
-name: Refresh GIP News
+name: science
 on:
   schedule:
     - cron: "42 * * * *"

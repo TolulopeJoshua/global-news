@@ -1,5 +1,5 @@
 
-name: Refresh GIP News
+name: sports
 on:
   schedule:
     - cron: "14 * * * *"

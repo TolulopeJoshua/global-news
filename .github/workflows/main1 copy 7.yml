@@ -1,5 +1,5 @@
 
-name: Refresh GIP News
+name: reel
 on:
   schedule:
     - cron: "56 * * * *"
