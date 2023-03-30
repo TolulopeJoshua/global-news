@@ -1,0 +1,15 @@
+
+name: Refresh GIP News
+on:
+  schedule:
+    - cron: "35 * * * *"
+jobs:
+  top:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh top
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/api/refresh?section=top'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'

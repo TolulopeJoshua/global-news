@@ -2,15 +2,15 @@
 name: Refresh GIP News
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "42 * * * *"
 jobs:
-  world:
+  science:
     runs-on: ubuntu-latest
     steps:
-      - name: Refresh world
+      - name: Refresh science
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/api/refresh?section=world'
+          url: 'https://gipnews.vercel.app/api/refresh?section=science,technology'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
           

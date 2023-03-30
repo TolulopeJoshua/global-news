@@ -1,0 +1,15 @@
+
+name: Refresh GIP News
+on:
+  schedule:
+    - cron: "14 * * * *"
+jobs:
+  sports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh sports
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://gipnews.vercel.app/api/refresh?section=sports'
+          method: 'POST'
+          customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'

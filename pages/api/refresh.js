@@ -91,7 +91,7 @@ export default async function handler(req,  res) {
                                 description = article.meta_description || description;
                             }
                             const dbPath = `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}/${id}.json`
-                            axios.put(dbPath, JSON.stringify({title, link, description, content, pubDate, image_url, id}))
+                            await axios.put(dbPath, JSON.stringify({title, link, description, content, pubDate, image_url, id}))
                             sectionData.unshift({title, link, description, content, pubDate, image_url, id});
                             writeFileSync(sectionPath, JSON.stringify(sectionData.sort((a,b) => {
                                 return (new Date(b.pubDate) - (new Date(a.pubDate)))
