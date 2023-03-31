@@ -64,7 +64,7 @@ export default () => {
             crossorigin="anonymous"></script>
         </Head>
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
-        <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1000px] items-start py-4'>
+        <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1500px] items-start py-4'>
             <div className='w-full sm:hidden'>
                 <Card news={data[0]} title={'Title 1'} desc={'description 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
@@ -101,17 +101,17 @@ export default () => {
             </div>
           </div>
         </section>
-        <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1000px] items-start py-4'>
+        <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1500px] items-start py-4'>
             <div className='w-full sm:hidden'>
                 <Card news={data[5]} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='hidden sm:flex sm:w-1/2 lg:w-5/12'>
                 <Card news={data[5]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
-            <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
+            <div className='w-full h-max sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
               <List list={live.slice(6,12)} title='Football Highlights' live={1} />
             </div>
-            <div className='w-full sm:w-1/2 lg:w-3/12 p-2'><Ads dataAdSlot={adConstants.square} /></div>
+            <div className='w-full aspect-square sm:w-1/2 lg:w-3/12 p-2'><Ads dataAdSlot={adConstants.square} /></div>
         </section>
         <section className='px-[3%] flex flex-wrap items-start py-4'>
             <div className='hidden md:flex md:w-1/2 xl:w-2/5'>
