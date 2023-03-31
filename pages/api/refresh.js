@@ -27,7 +27,7 @@ export default async function handler(req,  res) {
         try {
             if (section == 'reel') {
                 const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=snippet&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=25&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`;
-                const response = axios.get(url)
+                const response = await axios.get(url)
                 let { items } = response.data;
                 console.log(section, items.length);
                 sectionData = items.map(video => {

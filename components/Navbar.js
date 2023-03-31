@@ -31,7 +31,7 @@ export default function () {
   navigation.unshift({name: 'Home', href:'/', current: router.pathname == '/'})
 
   const openR = () => document.querySelector('#refr').style.transform = 'translate(0,0)';
-  const closeR = () => document.querySelector('#refr').style.transform = 'translate(-200px, -1000px)';
+  const closeR = () => document.querySelector('#refr').style.transform = 'translate(200px, -500px)';
   const refresh = async () => {
     try {
       const response = await axios.get('/api/data');
@@ -53,9 +53,9 @@ export default function () {
     <Disclosure as="nav" className="bg-gray-800 relative">
       {({ open }) => (
         <>
-          <span id='refr' style={{transform: 'translate(-200px, -1000px)'}}
+          <span id='refr' style={{transform: 'translate(200px, -500px)'}}
             onClick={() => toast.promise(refresh(), {loading: 'Refreshing...', success: <b>Done!</b>, error: <b>Please try again.</b>,})} 
-            className='absolute z-10 top-full m-6 flex gap-3 items-center p-3 font-semibold text-white bg-blue-600 rounded transition-all hover:scale-110 cursor-pointer'>
+            className='fixed z-10 top-16 right-0 m-2 flex gap-3 items-center p-3 font-semibold text-white bg-blue-600 rounded transition-all hover:scale-110 cursor-pointer'>
             <span><BsInfoCircle /></span>
             <span>Refresh</span>
             <button onClick={(e) => {
