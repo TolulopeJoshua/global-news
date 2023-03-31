@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }) {
         close();
       }).catch((error) => {
         toast.error('Error retrieving info')
+        console.log(error)
       });
   }
   const open = () => {

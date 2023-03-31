@@ -53,7 +53,8 @@ export default function () {
     <Disclosure as="nav" className="bg-gray-800 relative">
       {({ open }) => (
         <>
-          <span id='refr' onClick={() => toast.promise(refresh(), {loading: 'Refreshing...', success: <b>Done!</b>, error: <b>Please try again.</b>,})} 
+          <span id='refr' style={{transform: 'translate(-200px, -1000px)'}}
+            onClick={() => toast.promise(refresh(), {loading: 'Refreshing...', success: <b>Done!</b>, error: <b>Please try again.</b>,})} 
             className='absolute z-10 top-full m-6 flex gap-3 items-center p-3 font-semibold text-white bg-blue-600 rounded transition-all hover:scale-110 cursor-pointer'>
             <span><BsInfoCircle /></span>
             <span>Refresh</span>
