@@ -36,7 +36,7 @@ export default () => {
   const listData = data?.slice(((page - 1) * 20 + 15), (page * 20 + 15)) || [];
 
   useEffect(() => {
-    list.current?.scrollIntoView();
+    page != 1 && list.current?.scrollIntoView();
   }, [page])
 
   if (!data) {

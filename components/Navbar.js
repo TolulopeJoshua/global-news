@@ -2,8 +2,8 @@ import { Fragment, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { AiOutlineSearch } from 'react-icons/ai'
-import { BsDot } from 'react-icons/bs'
+import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
+import { BsDot, BsInfoCircle } from 'react-icons/bs'
 
 import sections from '../utils/sections'
 import Link from 'next/link'
@@ -11,6 +11,8 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux';
 import { dataActions } from '../store/index';
 import axios from 'axios'
+import { async } from '@firebase/util'
+import { toast } from 'react-hot-toast'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,18 +30,37 @@ export default function () {
   }))
   navigation.unshift({name: 'Home', href:'/', current: router.pathname == '/'})
 
-  useEffect(() => {
-    axios.get('/api/data').then(response => {
+  const openR = () => document.querySelector('#refr').style.transform = 'translate(0,0)';
+  const closeR = () => document.querySelector('#refr').style.transform = 'translate(-200px, -1000px)';
+  const refresh = async () => {
+    try {
+      const response = await axios.get('/api/data');
       dispatch(dataActions.setData(response.data));
       dispatch(dataActions.setLoading(false));
-      // console.log(response.data)
-    }).catch(e => dispatch(dataActions.setLoading(false)));
+      closeR();
+      setTimeout(openR, 60 * 60 * 1000);
+    } catch (error) {
+      dispatch(dataActions.setLoading(false));
+      openR();
+    }
+  }
+
+  useEffect(() => {
+    refresh();
   }, [])
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 relative">
       {({ open }) => (
         <>
+          <span id='refr' onClick={() => toast.promise(refresh(), {loading: 'Refreshing...', success: <b>Done!</b>, error: <b>Please try again.</b>,})} 
+            className='absolute z-10 top-full m-6 flex gap-3 items-center p-3 font-semibold text-white bg-blue-600 rounded transition-all hover:scale-110 cursor-pointer'>
+            <span><BsInfoCircle /></span>
+            <span>Refresh</span>
+            <button onClick={(e) => {
+              closeR(); e.stopPropagation();
+            }} className='p-1 border border-transparent hover:border-white/50'><AiOutlineClose /></button>
+          </span>
           <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
