@@ -21,10 +21,7 @@ import bg3 from '../../public/images/bg3.jpg'
 import { useSelector } from 'react-redux'
 
 export default () => {
-  // const [data, setData] = useState(null);
-  // const [features, setFeatures] = useState([]);
-  // const [reel, setReel] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [live, setLive] = useState([]);
   const [vBg, setVBg] = useState(bg1)
 
   const dataObject = useSelector(({data}) => data);
@@ -42,6 +39,9 @@ export default () => {
     } 
   }
   useEffect(() => {
+    axios.get('/api/live').then(({data}) => {
+      setLive(data.sort((a,b) => (Math.abs((new Date() - new Date(a.date))) - Math.abs((new Date() - new Date(b.date))))));
+    })
     setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
   }, [])
 
@@ -72,7 +72,7 @@ export default () => {
                 <Card news={data[0]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
-              <List list={data.filter(article => !article.image_url).slice(0,4)} title='Sports Stories' />
+              <List list={live.slice(0,6)} title='Live Football' live={1} />
             </div>
             <div className='w-full sm:w-1/2 lg:w-1/4 aspect-square p-2'>
                 <Ads dataAdSlot={adConstants.square} />
@@ -109,7 +109,7 @@ export default () => {
                 <Card news={data[5]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
-              <List list={data.filter(article => !article.image_url).slice(4,8)} title='More Stories' />
+              <List list={live.slice(6,12)} title='Football Highlights' live={1} />
             </div>
             <div className='w-full sm:w-1/2 lg:w-3/12 p-2'><Ads dataAdSlot={adConstants.square} /></div>
         </section>

@@ -3,7 +3,9 @@ import originf from '../../utils/originf';
 
 export default async function handler(req,  res) {
     if (req.method === 'POST') {
-        originf(req, res);
+        if (req.headers.host != req.headers.referer?.split('/')[2]) {
+            return res.end();
+        }
         let c = 0;
         search();
         function search() {
