@@ -82,6 +82,8 @@ export default async function handler(req,  res) {
                                     'X-RapidAPI-Host': 'extract-news.p.rapidapi.com'
                                 }
                             };
+                            console.log(link.split('/')[2]);
+                            console.log(title);
                             response = await axios.request(options)
                             const {article} = response.data;
                             if (article) {

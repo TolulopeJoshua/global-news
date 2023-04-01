@@ -14,6 +14,6 @@ jobs:
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
           timeout: 10000
-          retry: 2
+          retry: 1
           retryWait: 5000
           
