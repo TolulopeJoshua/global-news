@@ -15,4 +15,5 @@ jobs:
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
           timeout: 10000
           retry: 2
+          retryWait: 5000
           
