@@ -34,14 +34,14 @@ export default function () {
   const closeR = () => document.querySelector('#refr').style.transform = 'translate(200px, -500px)';
   const refresh = async () => {
     try {
+      closeR();
       const response = await axios.get('/api/data');
       dispatch(dataActions.setData(response.data));
       dispatch(dataActions.setLoading(false));
-      closeR();
       setTimeout(openR, 60 * 60 * 1000);
     } catch (error) {
-      dispatch(dataActions.setLoading(false));
       openR();
+      dispatch(dataActions.setLoading(false));
     }
   }
 
