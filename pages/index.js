@@ -108,7 +108,7 @@ const Home = () => {
             <div className=''>
               <Ads dataAdSlot={adConstants.square}/>
             </div>
-            <div className='pt-4'>
+            <div className='pt-4 hidden lg:inline-block'>
               <Ads dataAdSlot={adConstants.square}/>
             </div>
             <div className='py-4'>
