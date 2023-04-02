@@ -15,13 +15,16 @@ export default async function handler(req,  res) {
             let sectionData = [];
             let sectionPath = `/tmp/${section?.split(',')[0]}.json`;
             try {
-                // throw ' '
+                throw ' '
                 sectionData = JSON.parse(readFileSync(sectionPath)) || [];
                 data[section] = sectionData;
             } catch (error) { 
                 console.log('db get');
                 const urls = sections.slice(0,7).map(sec => `https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${sec.split(',')[0]}.json?orderBy="pubDate"&limitToLast=100`)
-                urls.push(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=snippet&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=25&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`)
+                urls.push(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=17&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`);
+                urls.push(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=24&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`);
+                urls.push(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=25&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`);
+                urls.push(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=player&part=contentDetails&part=status&chart=mostPopular&maxResults=50&videoCategoryId=28&key=${process.env.NEXT_SECRET_YOUTUBE_API_KEY}`);
                 // const newsSection = (await axios.get(url)).data;
                 const newsSections = (await Promise.all(urls.map(url => axios.get(url)))).map(res => res.data);
                 for (let newsSection of newsSections.slice(0,7)) {
@@ -44,8 +47,9 @@ export default async function handler(req,  res) {
                 section = 'reel';
                 sectionPath = `/tmp/reel.json`;
                 sectionData = [];
-                let { items } = newsSections[7];
-                sectionData = items.map(video => {
+                let items = newsSections.slice(7).reduce((it, data) => it.concat(data.items), [])
+                console.log(items.length);
+                sectionData = items.filter(({contentDetails}) => !contentDetails.regionRestriction).map(video => {
                     const {
                         id, snippet: {title, description, publishedAt: pubDate, 
                         thumbnails:{standard}}, player: {embedHtml: content}
@@ -56,7 +60,7 @@ export default async function handler(req,  res) {
                     return (new Date(b.pubDate) - (new Date(a.pubDate)))
                 }).map(art => ({...art, section}));
                 try {
-                    writeFileSync(sectionPath, JSON.stringify(data[section]));  
+                    writeFileSync(sectionPath, JSON.stringify(data[section]));   
                 } catch (error) { console.log('could not write to file') }
                 break;
             }
