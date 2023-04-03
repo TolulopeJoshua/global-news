@@ -91,7 +91,7 @@ const Home = () => {
         </section>
         <section className='px-[3%] block sm:flex flex-wrap'>
           <div className='w-full lg:w-6/12'>
-            <Card news={data.world[0]} title='My Title 1' cat='News' inline={1} hide={0} size='text-2xl' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            <Card news={data.world[0]} title='My Title 1' cat='News' inline={1} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
           </div>
           <div className='w-full lg:w-6/12 sm:flex flex-wrap'>
             {
