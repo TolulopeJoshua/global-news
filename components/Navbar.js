@@ -11,7 +11,6 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux';
 import { dataActions } from '../store/index';
 import axios from 'axios'
-import { async } from '@firebase/util'
 import { toast } from 'react-hot-toast'
 
 function classNames(...classes) {

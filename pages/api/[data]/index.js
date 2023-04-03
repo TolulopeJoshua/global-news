@@ -6,9 +6,9 @@ import axios from 'axios';
 
 export default async function handler(req,  res) {
     if (req.method === 'GET') {
-        if (req.headers.host != req.headers.referer?.split('/')[2]) {
-            return res.end();
-        }
+        // if (req.headers.host != req.headers.referer?.split('/')[2]) {
+        //     return res.end();
+        // }
 
         const data = {};
         for (let section of sections) {

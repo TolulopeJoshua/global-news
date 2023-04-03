@@ -14,7 +14,6 @@ import Footer from '../components/Footer'
 const provider = new GoogleAuthProvider();
 
 function MyApp({ Component, pageProps }) {
-
   const signUp = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
