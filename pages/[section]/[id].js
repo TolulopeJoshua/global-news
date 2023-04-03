@@ -79,7 +79,7 @@ export default () => {
                 <div className='w-full lg:w-3/4 px-2'>
                     {
                         data? <>
-                        <h1 className='pb-8 text-gray-700 text-4xl font-bold'>{data.title}</h1>
+                        <h1 className='pb-8 text-gray-700 text-4xl font-bold'>{data.title.replace(/.+\.[a-z]{2,3}\ \|\ /g, '')}</h1>
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
                         <div id='content' className='w-full text-justify text-gray-700 pt-8 pr-8'>
