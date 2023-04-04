@@ -231,7 +231,7 @@ export async function getStaticProps({params}) {
 }
 
 export async function getStaticPaths() {
-  const paths = sections.map((section) => ({
+  const paths = sections.filter(sec => !['sports, reel'].includes(sec)).map((section) => ({
     params: { section },
   }))
 
