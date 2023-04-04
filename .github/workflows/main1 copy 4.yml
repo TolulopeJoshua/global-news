@@ -10,9 +10,8 @@ jobs:
       - name: Refresh top
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://gipnews.vercel.app/api/refresh?section=top'
+          url: 'https://godinprints.org/api/gipnews/refresh?section=top'
           method: 'POST'
           customHeaders: '{"id": "_pxR945hMZJu303ldfIrWsOLns6Q"}'
-          timeout: 10000
+          timeout: 15000
           retry: 1
-          retryWait: 5000

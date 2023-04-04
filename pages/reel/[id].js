@@ -18,43 +18,39 @@ import Ads from '../../components/Ads'
 import adConstants from '../../utils/adConstants'
 import { useSelector } from 'react-redux'
 
-export default () => {
+export default ({data, list}) => {
 
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   // const [list, setList] = useState([]);
   // const [loading, setLoading] = useState(true)
   const router = useRouter();
   const { id } = router.query, section = 'reel';
 
-  let { data: obj, loading } = useSelector(({data}) => data);
-  const sectionData = obj && section ? [...obj[section]] : null;
-  const dat = (sectionData?.find(article => id && (article.id == id)));
-  const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
+  // let { data: obj, loading } = useSelector(({data}) => data);
+  // const sectionData = obj && section ? [...obj[section]] : null;
+  // const dat = (sectionData?.find(article => id && (article.id == id)));
+  // const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
   const [vBg, setVBg] = useState(bg1);
 
   useEffect(() => {
-      if(data) {
-          let { description } = data;
-          let content = description.replaceAll('\n', '<br>').split('. ');
-          document.querySelector('#content').innerHTML = content;
-      }
-      
-  }, [data])
-
-  useEffect(() => {
-    if (!loading && !dat) {
-        const url = `/api/data/${section}/${id}`
-        axios.get(url).then(res => {
-            setData(res.data);
-        }).catch(err => console.log('data not found'))
-    } else {
-        setData(dat)
+    // if (!loading && !dat) {
+    //     const url = `/api/data/${section}/${id}`
+    //     axios.get(url).then(res => {
+    //         setData(res.data);
+    //     }).catch(err => console.log('data not found'))
+    // } else {
+    //     setData(dat)
+    // }
+    if(data) {
+      let { description } = data;
+      let content = description.replaceAll('\n', '<br>').split('. ');
+      document.querySelector('#content').innerHTML = content;
     }
     setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
-  }, [loading, id])
+  }, [])
 
   if (!data && !list.length) {
-      if (loading)  return <Loader />
+      // if (loading)  return <Loader />
       return <Error />
   }
       
@@ -133,3 +129,15 @@ export default () => {
     </main>
   )
 }
+
+export async function getServerSideProps({params}) {
+    const {id} = params;
+    let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/reel/${id}`)
+    let {data, list} = dat;
+    return {
+      props: {
+        data, list
+      },
+    //   revalidate: 600,
+    }
+  }

@@ -20,24 +20,24 @@ import bg2 from '../../public/images/bg2.jpg'
 import bg3 from '../../public/images/bg3.jpg'
 import { useSelector } from 'react-redux'
 
-export default () => {
+export default ({data, features, reel}) => {
   const [live, setLive] = useState([]);
   const [vBg, setVBg] = useState(bg1)
 
-  const dataObject = useSelector(({data}) => data);
-  const sortByImage = (a,b) => ((a.image_url && !b.image_url) ? -1 : (b.image_url && !a.image_url) ? 1 : 0);
+  // const dataObject = useSelector(({data}) => data);
+  // const sortByImage = (a,b) => ((a.image_url && !b.image_url) ? -1 : (b.image_url && !a.image_url) ? 1 : 0);
   
-  let data = null, features = [], reel = [], { loading } = dataObject;
-  const section = 'sports';
-  for (let sect in dataObject.data) {
-    const sectData = [...dataObject.data[sect]].sort(sortByImage);
-    if (sect == section.split(',')[0]) {
-      data = sectData;
-    } else  {
-      if (sect == 'reel') (reel = sectData.slice(1));
-      features.push(sectData[0]);
-    } 
-  }
+  // let data = null, features = [], reel = [], { loading } = dataObject;
+  // const section = 'sports';
+  // for (let sect in dataObject.data) {
+  //   const sectData = [...dataObject.data[sect]].sort(sortByImage);
+  //   if (sect == section.split(',')[0]) {
+  //     data = sectData;
+  //   } else  {
+  //     if (sect == 'reel') (reel = sectData.slice(1));
+  //     features.push(sectData[0]);
+  //   } 
+  // }
   useEffect(() => {
     axios.get('/api/live').then(({data}) => {
       setLive(data.sort((a,b) => (Math.abs((new Date() - new Date(a.date))) - Math.abs((new Date() - new Date(b.date))))));
@@ -46,7 +46,7 @@ export default () => {
   }, [])
 
   if (!data) {
-    if (loading) return <Loader />
+    // if (loading) return <Loader />
     return <Error />
   }
 
@@ -269,4 +269,15 @@ export default () => {
         </section>
     </main> 
   )
+}
+
+export async function getStaticProps({params}) {
+  let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/sports`)
+  let {data, features, reel} = dat;
+  return {
+    props: {
+      data, features, reel
+    },
+    revalidate: 600,
+  }
 }

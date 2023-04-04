@@ -12,26 +12,28 @@ import Paginate from '../../components/Paginate'
 import Ads from '../../components/Ads'
 
 import adConstants from '../../utils/adConstants'
+import sections from '../../utils/sections'
 
-export default () => {
+export default ({data, features, reel}) => {
+  
   const router = useRouter()
   const { section, page=1 } = router.query
 
-  const dataObject = useSelector(({data}) => data);
-  const sortByImage = (a,b) => ((a.image_url && !b.image_url) ? -1 : (b.image_url && !a.image_url) ? 1 : 0);
+  // const dataObject = useSelector(({data}) => data);
+  // const sortByImage = (a,b) => ((a.image_url && !b.image_url) ? -1 : (b.image_url && !a.image_url) ? 1 : 0);
   
-  let data = null, features = [], reel = [], { loading } = dataObject;
-  if (section) {
-    for (let sect in dataObject.data) {
-      const sectData = [...dataObject.data[sect]].sort(sortByImage);
-      if (sect == section) {
-        data = sectData;
-      } else  {
-        if (sect == 'reel') (reel = sectData.slice(1));
-        features.push(sectData[0]);
-      } 
-    }
-  }
+  // let data = null, features = [], reel = [], { loading } = dataObject;
+  // if (section) {
+  //   for (let sect in dataObject.data) {
+  //     const sectData = [...dataObject.data[sect]].sort(sortByImage);
+  //     if (sect == section) {
+  //       data = sectData;
+  //     } else  {
+  //       if (sect == 'reel') (reel = sectData.slice(1));
+  //       features.push(sectData[0]);
+  //     } 
+  //   } 
+  // }
   const list = useRef(null)
   const listData = data?.slice(((page - 1) * 20 + 15), (page * 20 + 15)) || [];
 
@@ -39,8 +41,11 @@ export default () => {
     page != 1 && list.current?.scrollIntoView();
   }, [page])
 
+  if (router.isFallback) {
+    return <Loader />
+  }
   if (!data) {
-    if (loading) return <Loader />
+    // if (loading) return <Loader />
     return <Error />
   }
 
@@ -211,4 +216,24 @@ export default () => {
 
     </main>
   )
+}
+
+export async function getStaticProps({params}) {
+  const {section} = params;
+  let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/${section}`)
+  let {data, features, reel} = dat;
+  return {
+    props: {
+      data, features, reel
+    },
+    revalidate: 600,
+  }
+}
+
+export async function getStaticPaths() {
+  const paths = sections.map((section) => ({
+    params: { section },
+  }))
+
+  return { paths, fallback: true }
 }

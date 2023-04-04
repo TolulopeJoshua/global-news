@@ -22,7 +22,7 @@ import bg2 from '../public/images/bg2.jpg'
 import bg3 from '../public/images/bg3.jpg'
 import Link from 'next/link'
 
-const Home = () => {
+const Home = ({data}) => {
   const [guess, setGuess] = useState({number:0, input:0, attempts:0, result:0})
   const [city, setCity] = useState('New York')
   const [changeCity, setChangeCity] = useState(false);
@@ -31,7 +31,7 @@ const Home = () => {
   const [vBg, setVBg] = useState(bg1)
   // console.log(weatherData)
   
-  const {data, loading} = useSelector(({data}) => data);
+  // const {data, loading} = useSelector(({data}) => data);
 
   const getWeather = (location) => {
     axios.get(`/api/weather?location=${location}`)
@@ -67,7 +67,7 @@ const Home = () => {
   }
 
   if (!data) {
-    if (loading) return <Loader />
+    // if (loading) return <Loader />
     return <Error />
   }
   
@@ -341,6 +341,16 @@ const Home = () => {
         </section>
       </main>
   )
+}
+
+export async function getStaticProps({params}) {
+  let {data} = await axios.get(`https://godinprints.org/api/gipnews/data`)
+  return {
+    props: {
+      data
+    },
+    revalidate: 600,
+  }
 }
 
 export default Home

@@ -20,13 +20,13 @@ import Ads from '../../components/Ads'
 
 import adConstants from '../../utils/adConstants'
 
-export default () => {
+export default ({data}) => {
   
-  let { data, loading } = useSelector(({data}) => data);
-  data = data?.reel;
+  // let { data, loading } = useSelector(({data}) => data);
+  // data = data?.reel;
   
   if (!data) {
-    if (loading) return <Loader />
+    // if (loading) return <Loader />
     return <Error />
   }
 
@@ -44,7 +44,7 @@ export default () => {
             crossorigin="anonymous"></script>
         </Head>
         <section className='w-full aspect-video'>
-        <iframe className='w-full h-full' src={`//www.youtube.com/embed/${data[0].id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe className='w-full h-full' src={`//www.youtube.com/embed/${data[0].id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           {/* <VCard title={'Title 1'} type={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
         </section>
         <section className='px-[3%] w-full relative py-16 flex flex-col bg-gray-700 text-gray-300'>
@@ -156,4 +156,15 @@ export default () => {
         </section>
     </main>
   )
+}
+
+export async function getStaticProps({params}) {
+  let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/reel`)
+  let {data} = dat;
+  return {
+    props: {
+      data,
+    },
+    revalidate: 600,
+  }
 }

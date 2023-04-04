@@ -10,20 +10,21 @@ import Error from '../../components/Error'
 import Ads from '../../components/Ads'
 
 import adConstants from '../../utils/adConstants'
+import sections from '../../utils/sections'
 import { useSelector } from 'react-redux'
 
-export default () => {
+export default ({data, list}) => {
 
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     // const [list, setList] = useState([]);
     // const [loading, setLoading] = useState(true)
     const router = useRouter();
     const { section, id } = router.query;
 
-    let { data: obj, loading } = useSelector(({data}) => data);
-    const sectionData = obj && section ? [...obj[section]] : null;
-    const dat = (sectionData?.find(article => id && (article.id == id)));
-    const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
+    // let { data: obj, loading } = useSelector(({data}) => data);
+    // const sectionData = obj && section ? [...obj[section]] : null;
+    // const dat = (sectionData?.find(article => id && (article.id == id)));
+    // const list = sectionData?.concat(sectionData?.splice(0, sectionData?.indexOf(dat))).slice(1) || [];
 
     useEffect(() => {
         if(data) {
@@ -45,19 +46,19 @@ export default () => {
         }
     }, [data])
   
-    useEffect(() => {
-        if (!loading && !dat) {
-            const url = `/api/data/${section}/${id}`
-            axios.get(url).then(res => {
-                setData(res.data);
-            }).catch(err => console.log('data not found'))
-        } else {
-            setData(dat)
-        }
-    }, [loading, id])
+    // useEffect(() => {
+    //     if (!loading && !dat) {
+    //         const url = `/api/data/${section}/${id}`
+    //         axios.get(url).then(res => {
+    //             setData(res.data);
+    //         }).catch(err => console.log('data not found'))
+    //     } else {
+    //         setData(dat)
+    //     }
+    // }, [loading, id])
 
     if (!data && !list.length) {
-        if (loading)  return <Loader />
+        // if (loading)  return <Loader />
         return <Error />
     }
 
@@ -83,7 +84,7 @@ export default () => {
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
                         <div id='content' className='w-full text-justify text-gray-700 pt-8 pr-8'>
-                            
+                            {data.content}
                         </div></>:<Error type={1} />
                     }
                 </div>
@@ -154,3 +155,26 @@ export default () => {
         </main>
     )
 }
+
+export async function getServerSideProps({params}) {
+    const {section, id} = params;
+    let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/${section}/${id}`)
+    let {data, list} = dat;
+    return {
+      props: {
+        data, list
+      },
+    //   revalidate: 600,
+    }
+  }
+  
+//   export async function getStaticPaths() {
+//     let paths = [{params: {section: 'world', id: '12eb841a-d028-41df-89b5-1aa99dcb7956'}}];
+//     // const sects = await Promise.all(sections.map(section => axios.get(`https://gipnews-default-rtdb.firebaseio.com/${process.env.NEXT_SECRET_FIREBASE_APIKEY}/${section.split(',')[0]}.json?shallow=true`)))
+//     // sects.map(sect => {
+//     //     for (let key in sect) {
+//     //         paths.push({params: {section: sections[sects.indexOf(sect)], id: key}})
+//     //     }
+//     // })
+//     return { paths, fallback: true }
+//   }
