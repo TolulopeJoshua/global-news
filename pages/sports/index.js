@@ -271,13 +271,13 @@ export default ({data, features, reel}) => {
   )
 }
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
   let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/sports`)
   let {data, features, reel} = dat;
   return {
     props: {
       data, features, reel
     },
-    revalidate: 600,
+    // revalidate: 600,
   }
 }

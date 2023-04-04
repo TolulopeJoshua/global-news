@@ -218,7 +218,7 @@ export default ({data, features, reel}) => {
   )
 }
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
   const {section} = params;
   let {data: dat} = await axios.get(`https://godinprints.org/api/gipnews/${section}`)
   let {data, features, reel} = dat;
@@ -226,14 +226,14 @@ export async function getStaticProps({params}) {
     props: {
       data, features, reel
     },
-    revalidate: 600,
+    // revalidate: 600,
   }
 }
 
-export async function getStaticPaths() {
-  const paths = sections.filter(sec => !['sports', 'reel'].includes(sec)).map((section) => ({
-    params: { section },
-  }))
+// export async function getStaticPaths() {
+//   const paths = sections.filter(sec => !['sports', 'reel'].includes(sec)).map((section) => ({
+//     params: { section },
+//   }))
 
-  return { paths, fallback: true }
-}
+//   return { paths, fallback: true }
+// }

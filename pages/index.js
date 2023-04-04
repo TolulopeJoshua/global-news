@@ -23,6 +23,7 @@ import bg3 from '../public/images/bg3.jpg'
 import Link from 'next/link'
 
 const Home = ({data}) => {
+  // console.log(data)
   const [guess, setGuess] = useState({number:0, input:0, attempts:0, result:0})
   const [city, setCity] = useState('New York')
   const [changeCity, setChangeCity] = useState(false);
@@ -343,13 +344,13 @@ const Home = ({data}) => {
   )
 }
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps() {
   let {data} = await axios.get(`https://godinprints.org/api/gipnews/data`)
   return {
     props: {
       data
     },
-    revalidate: 600,
+    // revalidate: 600,
   }
 }
 
