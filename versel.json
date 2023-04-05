@@ -1,0 +1,6 @@
+{
+    "crons": [{
+      "path": "/api/gipweekly",
+      "schedule": "0 15 * * *"
+    }]
+  }
