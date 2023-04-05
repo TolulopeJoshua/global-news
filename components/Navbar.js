@@ -95,7 +95,7 @@ export default function () {
                 <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <Link
+                      <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -105,18 +105,18 @@ export default function () {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-                <Link href={'/search'} className='flex items-center p-1 lg:px-4 hover:px-5 transition-all mr-3 rounded-full bg-gray-300 cursor-text text-sm font-semibold outline-none ring-2 ring-gray-300 ring-offset-2 ring-offset-gray-800'>
+                <a href={'/search'} className='flex items-center p-1 lg:px-4 hover:px-5 transition-all mr-3 rounded-full bg-gray-300 cursor-text text-sm font-semibold outline-none ring-2 ring-gray-300 ring-offset-2 ring-offset-gray-800'>
                   <span className='pr-2 hidden lg:inline-block'>Search</span><AiOutlineSearch />
-                </Link>
-                <Link href={'https://godinprints.org'} target={'_blank'} className="bg-gray-800 px-3 py-1 text-gray-400 hover:text-white font-semibold" >
+                </a>
+                <a href={'https://godinprints.org'} target={'_blank'} className="bg-gray-800 px-3 py-1 text-gray-400 hover:text-white font-semibold" >
                   <Image src={'/bookstack.png'} width={32} height={32} alt='GIP Library' />
-                </Link>
+                </a>
 
                 {/* Profile dropdown */}
                 {/* <Menu as="div" className="relative ml-3">
@@ -180,7 +180,7 @@ export default function () {
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
-                <Link key={item.name} href={item.href}>
+                <a key={item.name} href={item.href}>
                 <Disclosure.Button
                   as="div"
                   className={classNames(
@@ -191,7 +191,7 @@ export default function () {
                 >
                   {item.name}
                 </Disclosure.Button>
-                </Link>
+                </a>
               ))}
             </div>
           </Disclosure.Panel>

@@ -80,7 +80,7 @@ export default ({data, list}) => {
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
                         <div id='content' className='w-full text-justify text-gray-700 pt-8 pr-8'>
-                            
+                            {data.content}
                         </div></>:<Error type={1} />
                     }
                 </div>

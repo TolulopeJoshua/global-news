@@ -71,8 +71,8 @@ export default ({data, list}) => {
             <div className='w-full lg:w-3/4 px-2'>
                 {
                     data ? <>
-                    <iframe className='w-full aspect-video' src={`//www.youtube.com/embed/${data?.id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    <div id='content' className='w-3/4 pt-8'> </div>
+                    <iframe className='w-full aspect-video' src={`//www.youtube.com/embed/${data?.id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                    <div id='content' className='w-3/4 pt-8'>{data.description}</div>
                     </>:<Error type={1} />
                 }
             </div>
