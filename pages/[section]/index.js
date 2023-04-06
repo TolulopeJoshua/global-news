@@ -70,12 +70,12 @@ export default ({data, features, reel}) => {
                         <Card news={data[0]} title={'Title 1'} hide={0} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                     </div>
                     <div className='hidden lg:flex lg:w-1/3'>
-                        <Card news={data[1]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+                        <Card news={data[0]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                     </div>
                 </div>
                 <div className='flex flex-wrap items-start w-full pb-4'>
                   {
-                    data.slice(2,8).map(article => (
+                    data.slice(1,7).map(article => (
                       <div key={article.title} className='w-full sm:w-1/2 lg:w-1/3'>
                           <Card news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                       </div>
@@ -93,7 +93,7 @@ export default ({data, features, reel}) => {
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
               {
-                data.slice(8,10).map(article => (
+                data.slice(7,9).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
@@ -102,14 +102,14 @@ export default ({data, features, reel}) => {
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
               {
-                data.slice(8,10).map(article => (
+                data.slice(7,9).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
               <div className='w-full p-2'><Ads dataAdSlot={adConstants.square} /></div>
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card news={data[11]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data[9]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
@@ -118,7 +118,7 @@ export default ({data, features, reel}) => {
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
               {
-                data.slice(12,15).map(article => (
+                data.slice(10,13).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} hide={0} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
@@ -126,13 +126,13 @@ export default ({data, features, reel}) => {
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
               {
-                data.slice(12,15).map(article => (
+                data.slice(10,13).map(article => (
                   <Card key={article.title} news={article} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
                 ))
               }
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card news={data[10]} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data[13]} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
