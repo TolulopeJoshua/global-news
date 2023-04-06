@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-    const res = await axios.post('https://godinprints.org/weeklyMails', null, {
-        headers: {'pass': '08162008'}
+    const response = await axios.post('https://godinprints.org/weeklyMails', null, {
+        headers: {'pass': req.query.pass}
     })
-    console.log(res.data);
-    res.status(200).send(res.data.toString());
+    console.log(response.data);
+    res.status(200).send(response.data.toString());
   }
