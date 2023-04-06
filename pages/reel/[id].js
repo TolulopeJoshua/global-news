@@ -72,6 +72,7 @@ export default ({data, list}) => {
                 {
                     data ? <>
                     <iframe className='w-full aspect-video' src={`//www.youtube.com/embed/${data?.id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                    <h1 className='pt-8 text-gray-300 text-lg md:text-xl lg:text-2xl font-bold'>{data.title.replace(/.+\.[a-z]{2,3}\ \|\ /g, '')}</h1>
                     <div id='content' className='w-3/4 pt-8'>{data.description}</div>
                     </>:<Error type={1} />
                 }

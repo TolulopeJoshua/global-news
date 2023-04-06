@@ -1,0 +1,17 @@
+
+name: weeklymail
+on:
+  schedule:
+    - cron: "0 9 * * *"
+jobs:
+  world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send mail
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://godinprints.org/weeklyMails'
+          method: 'POST'
+          customHeaders: '{"pass": "08162008"}'
+          timeout: 15000
+          
