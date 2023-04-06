@@ -2,7 +2,7 @@
 name: weeklymail
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 6 * * 5"
 jobs:
   world:
     runs-on: ubuntu-latest
