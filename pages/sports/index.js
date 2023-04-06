@@ -73,7 +73,7 @@ export default ({data, features, reel}) => {
                 <Card news={data[0]} title={'Title 1'} desc={'description 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
-              <List list={live.slice(0,6)} title='Football Highlights' live={0} />
+              <List list={live.slice(0,6)} title='Football Highlights' live={1} />
             </div>
             <div className='w-full sm:w-1/2 lg:w-1/4 aspect-square p-2'>
                 <Ads dataAdSlot={adConstants.square} />
@@ -110,7 +110,7 @@ export default ({data, features, reel}) => {
                 <Card news={data[5]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full h-max sm:w-1/2 sm:order-last lg:order-none lg:w-1/3 p-2'>
-              <List list={live.slice(6,12)} title='Football Highlights' live={0} />
+              <List list={live.slice(6,12)} title='Football Highlights' live={1} />
             </div>
             <div className='w-full aspect-square sm:w-1/2 lg:w-3/12 p-2'><Ads dataAdSlot={adConstants.square} /></div>
         </section>

@@ -13,7 +13,7 @@ export default ({list, title, live=0}) => {
   return (
     <div className='border-blue-700 border sm:border-0'>
         <h3 className='text-lg font-semibold text-white bg-blue-700 p-3 w-full flex items-center'>
-            {live ? <span className='animate-pulse rounded-full bg-red-500 w-6 h-6 mr-3'></span>:''}
+            {/* {live ? <span className='animate-pulse rounded-full bg-red-500 w-6 h-6 mr-3'></span>:''} */}
             <span>{title || 'Latest News'}</span>
         </h3>
         {
