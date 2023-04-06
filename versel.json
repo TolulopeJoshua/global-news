@@ -1,6 +1,0 @@
-{
-    "crons": [{
-      "path": "/api/gipweekly?pass=08162008",
-      "schedule": "0 8 * * *"
-    }]
-  }
