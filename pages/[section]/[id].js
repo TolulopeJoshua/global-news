@@ -65,13 +65,14 @@ export default ({data, list}) => {
   return (
         <main>
             <Head>
-            <title>GIP News | {data?.title}</title>
+            <title>GIP News | {data?.title.replace(/.+\.[a-z]{2,3}\ \|\ /g, '').slice(0,45)}</title>
             <meta
                 name="description"
                 content={`Breaking news | latest news | ${data?.description}`}
                 key="desc"
             />
             <link rel="icon" href="/favicon.ico" />
+            <link rel='canonical' href={`https://gipnews.vercel.app/${section}/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
                 crossorigin="anonymous"></script>
             </Head>

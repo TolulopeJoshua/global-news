@@ -63,6 +63,7 @@ export default ({data, list}) => {
             content={`Breaking news | Videos | ${data?.title}`}
             key="desc"
           />
+          <link rel='canonical' href={`https://gipnews.vercel.app/reel/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
           <link rel="icon" href="/favicon.ico" />
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
                 crossorigin="anonymous"></script>

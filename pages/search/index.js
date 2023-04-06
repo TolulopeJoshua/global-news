@@ -64,8 +64,9 @@ export default () => {
             key="desc"
         />
         <link rel="icon" href="/favicon.ico" />
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-                crossorigin="anonymous"></script>
+        <link rel='canonical' href={`https://gipnews.vercel.app/search`} />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous"></script>
         </Head>
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='border-b p-8 flex justify-center items-center'>

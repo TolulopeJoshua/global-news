@@ -50,13 +50,14 @@ export default () => {
   return (
         <main>
             <Head>
-                <title>GIP News | {data?.title}</title>
+                <title>GIP News | {data?.title.slice(0,45)}</title>
                 <meta
                     name="description"
                     content={`Sports news | ${data?.description}`}
                     key="desc"
                 />
                 <link rel="icon" href="/favicon.ico" />
+                <link rel='canonical' href={`https://gipnews.vercel.app/search/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
                     crossorigin="anonymous"></script>
             </Head>

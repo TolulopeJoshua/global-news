@@ -17,7 +17,7 @@ export default ({data, list}) => {
     // const [list, setList] = useState([]);
     // const [loading, setLoading] = useState(true)
     const router = useRouter();
-    // const { id } = router.query, section = 'sports';
+    const { id } = router.query, section = 'sports';
 
     // let { data: obj, loading } = useSelector(({data}) => data);
     // const sectionData = obj && section ? [...obj[section]] : null;
@@ -67,6 +67,7 @@ export default ({data, list}) => {
                     content={`Sports news | ${data?.description}`}
                     key="desc"
                 />
+                <link rel='canonical' href={`https://gipnews.vercel.app/sports/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
                 <link rel="icon" href="/favicon.ico" />
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
                     crossorigin="anonymous"></script>
