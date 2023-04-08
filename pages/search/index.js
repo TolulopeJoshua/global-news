@@ -26,7 +26,7 @@ export default () => {
 
     const search = (e) => {
         e.preventDefault();
-        if (query.trim().length < 3 || query.trim().length > 50) return toast('Query length must be between 3 & 50');
+        if (query.trim().length < 3 || query.trim().length > 100) return toast('Query length must be between 3 & 100');
         if (searching) return;
         setSearching(true)
         toast.loading('Searching...');
