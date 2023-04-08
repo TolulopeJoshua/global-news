@@ -5,7 +5,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Toaster, toast } from 'react-hot-toast'
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../firebase';
+import { auth, app } from '../firebase';
+import { getAnalytics } from "firebase/analytics";
 import store from '../store/index';
 
 import Navbar from '../components/Navbar'
@@ -41,6 +42,7 @@ function MyApp({ Component, pageProps }) {
         open();
       }, 20*1000);
     }
+    const analytics = getAnalytics(app);
   }, [])
 
   return (
