@@ -26,7 +26,8 @@ export default () => {
 
     const search = (e) => {
         e.preventDefault();
-        if (!query || searching) return;
+        if (query.trim().length < 3 || query.trim().length > 50) return toast('Query length must be between 3 & 50');
+        if (searching) return;
         setSearching(true)
         toast.loading('Searching...');
         axios.post(`/api/search`, {query}).then(response => {
