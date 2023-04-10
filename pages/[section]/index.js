@@ -59,7 +59,7 @@ export default ({data, features, reel}) => {
             key="desc"
           />
           <link rel="icon" href="/favicon.ico" />
-          <link rel='canonical' href={`https://gipnews.vercel.app/${section}`} />
+          <link rel='canonical' href={`https://gipnews.vercel.app/${section}${router.query.page ? `?page=${page}`:''}`} />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
             crossorigin="anonymous"></script>
         </Head>

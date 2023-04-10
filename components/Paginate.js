@@ -13,13 +13,13 @@ export default function ({page, pages, pathname}) {
     <div className="flex items-center justify-between border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
         <Link
-          href={page == 1 ? '#!' : `${pathname}?page=${page - 1}`}
+          href={page == 1 ? 'javascript:void(0)' : `${pathname}?page=${page - 1}`}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </Link>
         <Link
-          href={page == pages ? '#!' : `${pathname}?page=${page + 1}`}
+          href={page == pages ? 'javascript:void(0)' : `${pathname}?page=${page + 1}`}
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Next
@@ -35,7 +35,7 @@ export default function ({page, pages, pathname}) {
         <div>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <Link
-              href={page == 1 ? '#!' : `${pathname}?page=${page - 1}`}
+              href={page == 1 ? 'javascript:void(0)' : `${pathname}?page=${page - 1}`}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Previous</span>
@@ -47,7 +47,7 @@ export default function ({page, pages, pathname}) {
               <>
                 {[...Array(pages).keys()].map(x => (
                   <Link
-                    href={page == x+1 ? '#!':`${pathname}?page=${x+1}`}
+                    href={page == x+1 ? 'javascript:void(0)':`${pathname}?page=${x+1}`}
                     className={page == (x+1) ? 
                       "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                       "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -57,7 +57,7 @@ export default function ({page, pages, pathname}) {
                 ))}
               </>:<>
                   <Link
-                    href={page == 1 ? '#!':`${pathname}?page=${1}`}
+                    href={page == 1 ? 'javascript:void(0)':`${pathname}?page=${1}`}
                     className={page == (1) ? 
                       "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                       "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -67,7 +67,7 @@ export default function ({page, pages, pathname}) {
                   {
                     [1,2,3].includes(page) ?
                     <Link
-                      href={page == 2 ? '#!':`${pathname}?page=${2}`}
+                      href={page == 2 ? 'javascript:void(0)':`${pathname}?page=${2}`}
                       className={page == (2) ? 
                         "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                         "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -82,7 +82,7 @@ export default function ({page, pages, pathname}) {
                     mids.map(mid => (
                       <Link
                         key={mid}
-                        href={page == mid ? '#!':`${pathname}?page=${mid}`}
+                        href={page == mid ? 'javascript:void(0)':`${pathname}?page=${mid}`}
                         className={page == (mid) ? 
                           "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                           "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -97,7 +97,7 @@ export default function ({page, pages, pathname}) {
                       ...
                     </span> :
                     <Link
-                      href={page == pages-1 ? '#!':`${pathname}?page=${pages-1}`}
+                      href={page == pages-1 ? 'javascript:void(0)':`${pathname}?page=${pages-1}`}
                       className={page == (pages-1) ? 
                         "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                         "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -106,7 +106,7 @@ export default function ({page, pages, pathname}) {
                     </Link>
                   }
                   <Link
-                    href={page == pages ? '#!':`${pathname}?page=${pages}`}
+                    href={page == pages ? 'javascript:void(0)':`${pathname}?page=${pages}`}
                     className={page == (pages) ? 
                       "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600":
                       "relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"}
@@ -153,7 +153,7 @@ export default function ({page, pages, pathname}) {
               10
             </a> */}
             <Link
-              href={page == pages ? '#!' : `${pathname}?page=${page + 1}`}
+              href={page == pages ? 'javascript:void(0)' : `${pathname}?page=${page + 1}`}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Next</span>
