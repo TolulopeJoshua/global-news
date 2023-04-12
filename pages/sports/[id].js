@@ -78,7 +78,7 @@ export default ({data, list}) => {
                     {
                         data ? <>
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
-                        <span className='pt-4 flex w-full text-sm text-gray-400 justify-between'>
+                        <span className='pt-4 flex gap-3 w-full text-sm text-gray-400 justify-between'>
                             <span> | {(new Date(data.pubDate)).toUTCString()}</span>
                             <em onClick={() => {
                                 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=0,right=0,top=0`; 
