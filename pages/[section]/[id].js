@@ -82,7 +82,13 @@ export default ({data, list}) => {
                     {
                         data? <>
                         <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
-                        <span className='pt-4 block text-sm text-gray-400'> | {(new Date(data.pubDate)).toUTCString()}</span>
+                        <span className='pt-4 flex w-full text-sm text-gray-400 justify-between'>
+                            <span> | {(new Date(data.pubDate)).toUTCString()}</span>
+                            <em onClick={() => {
+                                let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=0,right=0,top=0`; 
+                                window.open(data.link, 'news', params)
+                            }} className='text-blue-300 cursor-pointer font-semibold'>{data.link.split('/')[2]}</em>
+                        </span>
                         <h1 className='pt-8 text-gray-700 text-xl md:text-2xl lg:text-3xl font-bold'>{data.title.replace(/.+\.[a-z]{2,3}\ \|\ /g, '')}</h1>
                         <div id='content' className='w-full text-justify text-gray-700 pt-8 pr-8'>
                             {data.content}
