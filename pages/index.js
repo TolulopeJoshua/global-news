@@ -341,6 +341,7 @@ const Home = ({data}) => {
             </div>
           </div>
         </section>
+        <script data-cfasync="false" type="text/javascript" data-adel="atag" src="//achcdn.com/script/atg.js" czid="uenyzel5z7"></script>
       </main>
   )
 }
