@@ -124,7 +124,7 @@ export default ({data}) => {
             <button className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></button>
           </div>
           <span className='py-2 text-white'>Trending videos from around the web</span> */}
-          <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
             {
               data.slice(28,31).map(vid =>(
                 <VCard video={vid} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -134,7 +134,7 @@ export default ({data}) => {
         </section>
         <section className='px-[3%] h-fit w-full relative my-8 py-6 flex flex-col overflow-y-clip'>
           <Image className='absolute -z-10 scale-110' src={bg2} layout='fill' objectFit='cover' quality={100} alt='background' />
-          <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
             {
               data.slice(31,34).map(vid =>(
                 <VCard video={vid} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -144,7 +144,7 @@ export default ({data}) => {
         </section>
         <section className='px-[3%] h-fit w-full relative my-8 py-6 flex flex-col overflow-y-clip'>
           <Image className='absolute -z-10 scale-110' src={bg3} layout='fill' objectFit='cover' quality={100} alt='background' />
-          <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
             {
               data.slice(34,37).map(vid =>(
                 <VCard video={vid} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />

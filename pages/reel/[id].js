@@ -91,7 +91,7 @@ export default ({data, list}) => {
         </section>
         <section className='px-[3%] h-fit w-full relative py-6 flex flex-col overflow-y-clip'>
           <Image className='absolute -z-10 scale-110' src={vBg} layout='fill' objectFit='cover' quality={100} alt='background' />
-          <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
             {
               list.slice(3,6).map(vid => (
                 <VCard video={vid} key={vid.title} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />

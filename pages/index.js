@@ -222,7 +222,7 @@ const Home = ({data}) => {
               <Link href={'/reel'} className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></Link>
             </div>
             <span className='py-2 text-white'>Trending videos from around the web</span>
-            <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
               {
                 data.reel.slice(0,3).map(video => (
                   <VCard key={video.id} video={video} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
@@ -306,7 +306,7 @@ const Home = ({data}) => {
               <Link href={'/reel'} className='absolute right-0 px-3 hover:bg-gray-400 bg-gray-300 text-gray-100 hover:text-gray-200 rounded-full'><HiOutlineArrowNarrowRight /></Link>
             </div>
             <span className='py-2 text-white'>More trending videos from around the web</span>
-            <div className='flex flex-col sm:flex-row gap-4 py-2'>
+            <div className='flex flex-col sm:grid sm:grid-cols-3 gap-4 py-2'>
               {
                 data.reel.slice(3,6).map(video => (
                   <VCard key={video.id} video={video} title={'Title 1'} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
