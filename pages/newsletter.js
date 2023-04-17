@@ -6,34 +6,49 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
 import { BiArrowBack } from 'react-icons/bi'
 import axios from 'axios';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, app } from '../firebase';
 import { toast } from 'react-hot-toast';
 
 export default () => {
   const router = useRouter();
-  const {uid} = router.query;
+  let { uid } = router.query;
+
+  const provider = new GoogleAuthProvider();
 
   const [status, setStatus] = useState('');
-  const [mail, setMail] = useState();
+  const [mail, setMail] = useState('');
 
   const changeStatus = (n) => {
-    if (!mail) return toast('Try again later.');
-    toast.promise(axios.put(`/api/signup?uid=${uid}&email=${mail}&status=${n}`)
-      .then(() => setStatus(`${n}`)), {
-      loading: 'Switching...', error: 'Try again later.',
-    })
+    if (!mail) {
+      signInWithPopup(auth, provider).then((result) => {
+        const user = result.user;
+        localStorage.setItem('user', JSON.stringify(user));
+        switchStatus(user.uid, user.email);
+        setMail(user.email); uid = user.uid;
+        document.querySelector('#su').style.transform = 'translate(-200px, 200px)';
+      }).catch(() =>  toast.error('An error occurred'));
+      return;
+    };
+    switchStatus(uid, mail);
+    function switchStatus(uid, mail) {
+        toast.promise(axios.put(`/api/signup?uid=${uid}&email=${mail}&status=${n}`)
+        .then(() => setStatus(`${n}`)), {
+        loading: 'Switching...', success: 'Success', error: 'Try again later',
+      })
+    }
   }
 
   useEffect(() => {
     if (!uid) return;
     toast.dismiss();
     axios.get(`/api/signup?uid=${uid}`).then(res => {
-      console.log(res.data);
       setStatus(res.data.status); setMail(res.data.email);
     }).catch(e => console.log(e));
   }, [uid]);
 
   return (
-    <main className='flex flex-col w-full justify-center items-center pb-24  bg-blue-50'>
+    <main className='flex flex-col w-full justify-center items-center pb-24 bg-gradient-to-b from-blue-50 to-gray-100 border-b'>
       <div onClick={() => router.back()} className='border-b-2 text-3xl p-8 mb-8 w-full transition-colors hover:text-blue-400 cursor-pointer'>
         <span><BiArrowBack /></span>
       </div>

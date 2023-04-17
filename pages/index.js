@@ -81,6 +81,7 @@ const Home = ({data}) => {
             content="Breaking news, latest news, sports and entertainment, health, science and technology."
             key="desc"
           />
+          <meta name="a.validate.02" content="Nzkj9hV9zxYHRykE7gJnXvEVOAoyhVaD210U" />
           <link rel="icon" href="/favicon.ico" />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
             crossorigin="anonymous"></script>

@@ -45,10 +45,10 @@ export default ({data, features, reel}) => {
     setVBg([bg1, bg2, bg3][Math.floor(Math.random() * 3)]);
   }, [])
 
-  if (!data) {
-    // if (loading) return <Loader />
-    return <Error />
-  }
+  // if (!data) {
+  //   // if (loading) return <Loader />
+  //   return <Error />
+  // }
 
   return (
     <main className='overflow-x-clip'>
