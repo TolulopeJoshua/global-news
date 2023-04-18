@@ -57,10 +57,10 @@ export default ({data, list}) => {
   return (
     <main className='overflow-x-clip'>
         <Head>
-          <title>GIP News | {data?.title}</title>
+          <title>GIP News | {data?.title.slice(0,45)}</title>
           <meta
             name="description"
-            content={`Breaking news | Videos | ${data?.title}`}
+            content={`News Reel | Videos | ${data?.title}`}
             key="desc"
           />
           <link rel='canonical' href={`https://gipnews.vercel.app/reel/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
