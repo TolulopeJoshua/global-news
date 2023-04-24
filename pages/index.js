@@ -97,18 +97,12 @@ const Home = ({data}) => {
           </div>
           <div className='w-full lg:w-6/12 sm:flex flex-wrap'>
             {
-              data.world.slice(1,3).map(article => (
+              data.world.slice(1,5).map(article => (
               <div key={article.id} className='sm:w-6/12 sm:h-3/6'>
                 <Card news={article} title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               </div>
               ))
             }
-            <div key={data['science,technology'][0].id} className='sm:w-6/12 sm:h-3/6'>
-              <Card news={data['science,technology'][0]} title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div key={data.entertainment[0].id} className='sm:w-6/12 sm:h-3/6'>
-              <Card news={data.entertainment[0]} title='My Title 1' cat='News' inline={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
           </div>
         </section>
         <section className='px-[3%] flex flex-wrap sm:flex-row-reverse justify-center py-4'>
@@ -247,18 +241,18 @@ const Home = ({data}) => {
           <div className='flex w-full items-start'>
             {/* constains the same cards */}
             <div className='flex flex-col w-full sm:hidden'>
-              <Card news={data['science,technology'][1]} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card news={data.world[3]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[5]} title={'Title 1'} desc={'description 1'} hide={0} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
               {/* <Card news={data.world[2]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}
             </div>
             {/* as this! */}
             <div className='hidden sm:flex w-full lg:w-3/4'>
-              <Card news={data['science,technology'][1]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card news={data.world[3]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-              <Card news={data.world[4]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[5]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[6]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[7]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='hidden lg:flex w-1/4'>
-              <Card news={data.health[3]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data.world[8]} title={'Title 1'} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
         </section>
@@ -283,19 +277,19 @@ const Home = ({data}) => {
               <Card news={data.entertainment[1]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
-              <Card news={data['science,technology'][2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
-              <Card news={data['science,technology'][3]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
-            </div>
-            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
               <Card news={data.entertainment[2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
-              <Card news={data.top[2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data['science,technology'][0]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
             <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
-              <Card news={data.sports[3]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+              <Card news={data['science,technology'][1]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            </div>
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data['science,technology'][2]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
+            </div>
+            <div className='w-full h-auto sm:w-1/2 lg:w-1/3'>
+              <Card news={data.entertainment[3]} title={'Title 1'} light={1} desc={'description 1'} cat='News' img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} />
             </div>
           </div>
           <div className='w-full sm:w-1/3 h-full sm:pt-10 p-2'>
