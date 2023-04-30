@@ -8,5 +8,5 @@ export default async function handler( req, res ) {
       return res.end();
   }
   const detectedIp = requestIp.getClientIp(req)
-  res.status(200).send((await axios.get(`https://ipapi.co/${detectedIp}/json/`)).data.city)
+  res.status(200).send((await axios.get(`https://ipapi.co/${detectedIp}/json/`)).data.region)
 }
