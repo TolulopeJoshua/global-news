@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -66,9 +67,9 @@ export default () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel='canonical' href={`https://gipnews.vercel.app/search`} />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+            crossorigin="anonymous" />
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='border-b p-8 flex justify-center items-center'>
             <form onSubmit={search} className='w-10/12 md:w-8/12 relative'>

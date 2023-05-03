@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import axios from 'axios'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import Card from '../../components/Card'
 import Loader from '../../components/Loader'
@@ -73,15 +75,15 @@ export default ({data, list}) => {
             />
             <link rel="icon" href="/favicon.ico" />
             <link rel='canonical' href={`https://gipnews.vercel.app/${section}/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-                crossorigin="anonymous"></script>
             </Head>
+            <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous" />
             <div><Ads dataAdSlot={adConstants.horizontal} /></div>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 p-2'>
                     {
                         data? <>
-                        <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
+                        <LazyLoadImage src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 flex gap-3 w-full text-sm text-gray-400 justify-between'>
                             <span> | {(new Date(data.pubDate)).toUTCString()}</span>
                             <em onClick={() => {

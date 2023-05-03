@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Image from 'next/image'
+import Script from 'next/script'
 
 import { MdOutlineFeaturedPlayList } from 'react-icons/md'
 
@@ -65,9 +66,9 @@ export default ({data, list}) => {
           />
           <link rel='canonical' href={`https://gipnews.vercel.app/reel/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
           <link rel="icon" href="/favicon.ico" />
-              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-                crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+          crossorigin="anonymous" />
         <section className='p-[3%] w-full relative flex bg-gray-700 text-gray-300'>
             <div className='w-full lg:w-3/4 px-2'>
                 {

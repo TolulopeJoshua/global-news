@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import axios from 'axios'
@@ -61,9 +62,9 @@ export default ({data, features, reel}) => {
           />
           <link rel="icon" href="/favicon.ico" />
           <link rel='canonical' href={`https://gipnews.vercel.app/sports`} />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+          crossorigin="anonymous" />
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='px-[3%] flex flex-col lg:flex-row flex-wrap max-h-[1500px] items-start py-4'>
             <div className='w-full sm:hidden'>

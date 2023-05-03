@@ -1,7 +1,9 @@
 import axios from 'axios'
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import Card from '../../components/Card'
 import Error from '../../components/Error'
@@ -69,15 +71,15 @@ export default ({data, list}) => {
                 />
                 <link rel='canonical' href={`https://gipnews.vercel.app/sports/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
                 <link rel="icon" href="/favicon.ico" />
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-                    crossorigin="anonymous"></script>
             </Head>
+            <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous" />
             <div><Ads dataAdSlot={adConstants.horizontal} /></div>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>
                     {
                         data ? <>
-                        <img src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
+                        <LazyLoadImage src={data.image_url} className='w-full aspect-video bg-gray-600' alt=' ' />
                         <span className='pt-4 flex gap-3 w-full text-sm text-gray-400 justify-between'>
                             <span> | {(new Date(data.pubDate)).toUTCString()}</span>
                             <em onClick={() => {

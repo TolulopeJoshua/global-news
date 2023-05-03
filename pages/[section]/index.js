@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import axios from 'axios'
 
@@ -60,9 +61,9 @@ export default ({data, features, reel}) => {
           />
           <link rel="icon" href="/favicon.ico" />
           <link rel='canonical' href={`https://gipnews.vercel.app/${section}${router.query.page ? `?page=${page}`:''}`} />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+          crossorigin="anonymous" />
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='px-[3%] flex flex-wrap justify-center py-4 h-max'>
             <div className='w-full h-max sm:w-1/2 lg:w-2/3 xl:w-3/4'>   

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import Head from 'next/head'
 import Image from 'next/image'
+import Script from 'next/script'
 
 import { MdOutlineRestartAlt } from 'react-icons/md'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -83,9 +84,9 @@ const Home = ({data}) => {
           />
           <meta name="a.validate.02" content="Nzkj9hV9zxYHRykE7gJnXvEVOAoyhVaD210U" />
           <link rel="icon" href="/favicon.ico" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+          crossorigin="anonymous" />
         <div><Ads dataAdSlot={adConstants.horizontal} /></div>
         <section className='px-[3%] flex justify-between pt-8 text-xl text-gray-600'>
           <h1 className='font-bold px-2'>Welcome to GIP News</h1>

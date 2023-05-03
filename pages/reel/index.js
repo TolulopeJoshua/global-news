@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
+import Script from 'next/script'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { MdOutlineFeaturedPlayList } from 'react-icons/md'
@@ -41,9 +42,9 @@ export default ({data}) => {
           />
           <link rel="icon" href="/favicon.ico" />
           <link rel='canonical' href={`https://gipnews.vercel.app/reel`} />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-            crossorigin="anonymous"></script>
         </Head>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+          crossorigin="anonymous" />
         <section className='w-full aspect-video'>
         <iframe className='w-full h-full' src={`//www.youtube.com/embed/${data[0].id}?mute=1&autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           {/* <VCard title={'Title 1'} type={1} img={{src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtQlxkt2lEJbALSfkluO7UhVpgQdLMmQ_R3iQALlPs&s'}} /> */}

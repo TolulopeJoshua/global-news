@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
@@ -58,9 +59,9 @@ export default () => {
                 />
                 <link rel="icon" href="/favicon.ico" />
                 <link rel='canonical' href={`https://gipnews.vercel.app/search/${id}?title=${data?.title?.replace(/[\ \/\?\:\;\,\.\|]/g, '-')}`} />
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
-                    crossorigin="anonymous"></script>
             </Head>
+            <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5331978820452259"
+                crossorigin="anonymous" />
             <div><Ads dataAdSlot={adConstants.horizontal} /></div>
             <section className='p-[3%] w-full relative flex items-start text-gray-300'>
                 <div className='w-full lg:w-3/4 px-2'>
