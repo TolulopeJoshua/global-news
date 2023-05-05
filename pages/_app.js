@@ -48,11 +48,11 @@ function MyApp({ Component, pageProps }) {
 
   React.useEffect(() => {
     // localStorage.removeItem('user');
-    if (!(localStorage.getItem('user'))) {
-      setTimeout(() => {
-        open();
-      }, 20*1000);
-    }
+    // if (!(localStorage.getItem('user'))) {
+    //   setTimeout(() => {
+    //     open();
+    //   }, 20*1000);
+    // }
     const analytics = getAnalytics(app);
   }, [])
 
