@@ -1,0 +1,24 @@
+
+name: mails
+on:
+  schedule:
+    - cron: "0 18 */14 * 5/1"
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: weekly mails
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://godinprints.org/weeklyMails'
+          method: 'POST'
+          customHeaders: '{"pass": "08162008"}'
+          timeout: 15000
+      - name: review mails
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://godinprints.org/bookReviews'
+          method: 'POST'
+          customHeaders: '{"pass": "08162008"}'
+          timeout: 15000
+          
