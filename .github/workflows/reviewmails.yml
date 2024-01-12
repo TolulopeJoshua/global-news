@@ -1,0 +1,16 @@
+name: review mails
+on:
+  schedule:
+    - cron: "0 19 */7 * 5/1"
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: review mails
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://godinprints.org/bookReviews'
+          method: 'POST'
+          customHeaders: '{"pass": "08162008"}'
+          timeout: 15000
+          
