@@ -1,7 +1,7 @@
 name: review mails
 on:
   schedule:
-    - cron: "0 19 * * 5"
+    - cron: "0 18 * * 0"
 jobs:
   send:
     runs-on: ubuntu-latest
