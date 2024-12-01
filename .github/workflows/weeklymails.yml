@@ -1,7 +1,7 @@
 name: weekly mails
 on:
   schedule:
-    - cron: "0 17 * * 4,5,6"
+    - cron: "0 17 * * 3,4,5,6"
 jobs:
   send:
     runs-on: ubuntu-latest
