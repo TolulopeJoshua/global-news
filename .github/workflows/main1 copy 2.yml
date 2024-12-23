@@ -2,7 +2,7 @@
 name: business
 on:
   schedule:
-    - cron: "21 * * * *"
+    - cron: "21 */3 * * *"
 jobs:
   business:
     runs-on: ubuntu-latest
