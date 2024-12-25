@@ -2,7 +2,7 @@
 name: reel
 on:
   schedule:
-    - cron: "59 */3 * * *"
+    - cron: "59 */300 * * *"
 jobs:
   reel:
     runs-on: ubuntu-latest

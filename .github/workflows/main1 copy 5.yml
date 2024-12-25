@@ -2,7 +2,7 @@
 name: science
 on:
   schedule:
-    - cron: "42 */3 * * *"
+    - cron: "42 */300 * * *"
 jobs:
   science:
     runs-on: ubuntu-latest

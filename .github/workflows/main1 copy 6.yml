@@ -2,7 +2,7 @@
 name: entertainment
 on:
   schedule:
-    - cron: "49 */3 * * *"
+    - cron: "49 */300 * * *"
 jobs:
   entertainment:
     runs-on: ubuntu-latest
