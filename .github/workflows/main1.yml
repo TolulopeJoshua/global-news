@@ -2,7 +2,7 @@
 name: world
 on:
   schedule:
-    - cron: "7 */300 * * *"
+    - cron: "0 4,10,16,22 * * *"
 jobs:
   world:
     runs-on: ubuntu-latest

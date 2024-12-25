@@ -2,7 +2,7 @@
 name: health
 on:
   schedule:
-    - cron: "28 */300 * * *"
+    - cron: "0 0 */2 * *"
 jobs:
   health:
     runs-on: ubuntu-latest

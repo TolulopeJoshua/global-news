@@ -2,7 +2,7 @@
 name: top
 on:
   schedule:
-    - cron: "35 */300 * * *"
+    - cron: "0 1,7,13,19 * * *"
 jobs:
   top:
     runs-on: ubuntu-latest
