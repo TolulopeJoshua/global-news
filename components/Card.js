@@ -12,7 +12,7 @@ export default ({news={}, title='', desc='', size='text-base', cat='', img={}, i
         </div>
         <div className={`flex flex-col bottom-5 left-5 text-left ${right && 'w-1/2 sm:pb-6'} ${light && 'p-2 bg-white'} ${!hide && !right && 'absolute'} ${inline && 'sm:absolute'} ${hide && 'border-b-2 border-b-gray-200 sm:border-0 pb-2 pr-4 sm:pb-0'}`}>
             <p className={`my-1 pr-2 ${inline ? `${hide ? 'text-gray-400 sm:text-gray-400' : 'text-gray-400'}`: 'text-gray-400'} ${size}`}><strong>{news.title?.replace(/.+\.[a-z]{2,3}\ \|\ /g, '') || title}</strong></p>
-            <p className={`text-gray-400 text-sm font-[cursive] hidden ${desc && 'sm:inline-block pb-2'}`}>{news.description?.split(' ').slice(0,14).join(' ') || desc}</p>
+            <p className={`text-gray-400 text-sm hidden ${desc && 'sm:inline-block pb-2'}`}>{news.description?.split(' ').slice(0,14).join(' ') || desc}</p>
             {
               cat &&
               <p className='text-sm mt-auto'>
