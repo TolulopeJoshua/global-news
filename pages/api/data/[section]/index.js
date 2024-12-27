@@ -20,20 +20,20 @@ export default async function handler(req, res) {
             .slice(0, 100)
             .map((art) => ({ ...art, section, content: "" }));
 
-        const featuresData = sects
-            .filter((sect) => sect != section)
-            .map((section) => axios.get(dbUrl(section, 10)));
+        const featuresData = sects.map((section) => axios.get(dbUrl(section, 10)));
 
-        const features = (await Promise.all(featuresData)).map(
-            ({ data }, index) => {
-                const section = sects[index];
-                data = Object.values(data).sort(noimage);
-                if (section == "reel") {
-                    reel = data.slice(1, 5).map((vid) => ({ ...vid, section }));
+        const features = (await Promise.all(featuresData))
+            .map(
+                ({ data }, index) => {
+                    const section = sects[index];
+                    data = Object.values(data).sort(dateDesc).sort(noimage);
+                    if (section == "reel") {
+                        reel = data.slice(1, 5).map((vid) => ({ ...vid, section }));
+                    }
+                    return { ...data[0], section, content: "" };
                 }
-                return { ...data[0], section, content: "" };
-            }
-        );
+            )
+            .filter((_, index) => index != sectionIndex);
 
         res.status(200).send({
             data: sectionData,
